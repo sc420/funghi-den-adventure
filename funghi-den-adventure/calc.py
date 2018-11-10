@@ -17,6 +17,7 @@ import yaml
 REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
 REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
 CHECK_QUALIFICATION_SPEC_NAMES = ['stats', 'skills']
+EMPTY_ID = -1
 
 
 def load_data():
@@ -94,7 +95,7 @@ def is_funghi_qualified_for_requirement(funghi, requirement):
     return True
 
 
-def calc_total_adventure_capacities(data):
+def calc_total_adventure_capacity(data):
     count = 0
     adventures = data['adventures']
     for adventure in adventures.values():
@@ -102,28 +103,60 @@ def calc_total_adventure_capacities(data):
     return count
 
 
-def gen_funghi_permutations(data, total_capacity):
+def calc_total_funghi_capacity(data):
+    count = 0
+    funghis = data['funghis']
+    for funghi in funghis.values():
+        count += funghi['capacity']
+    return count
+
+
+def gen_funghi_permutations(data, adventure_capacity, funghi_capacity):
     candidates = []
+    # Generate funghi candidates
     funghis = data['funghis']
     for funghi_id, funghi in funghis.items():
         fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
         candidates.append(*list(fungi_repeated_ids))
-    return itertools.permutations(candidates, total_capacity)
+    # If there are not enough funghis, generate empty funghis
+    if funghi_capacity < adventure_capacity:
+        empty_size = adventure_capacity - funghi_capacity
+        empty_repeated_ids = itertools.repeat(EMPTY_ID, empty_size)
+        candidates.append(*list(empty_repeated_ids))
+    return itertools.permutations(candidates, adventure_capacity)
 
 
-def calc_funghi_permutations_scores(data, funghi_permutations, qualified_funghis):
+def convert_permutations_to_allocations(data, funghi_permutations):
+    allocations = []
+    adventures = data['adventures']
     for permutation in funghi_permutations:
-        print(permutation)
+        allocation = {}
+        ofs_start = 0
+        for adventure_id, adventure in adventures.items():
+            capacity = adventure['capacity']
+            ofs_end = ofs_start + capacity
+            allocation[adventure_id] = permutation[ofs_start:ofs_end]
+            ofs_start = ofs_end
+        allocations.append(allocation)
+    return allocations
+
+
+def calc_allocations_scores(data, funghi_allocations, qualified_funghis):
+    for allocation in funghi_allocations:
+        print(allocation)
 
 
 def main():
     data = load_data()
     normalize_data(data)
     qualified_funghis = filter_qualified_funghis(data)
-    total_capacity = calc_total_adventure_capacities(data)
-    funghi_permutations = gen_funghi_permutations(data, total_capacity)
-    calc_funghi_permutations_scores(
-        data, funghi_permutations, qualified_funghis)
+    total_adventure_capacity = calc_total_adventure_capacity(data)
+    total_funghi_capacity = calc_total_funghi_capacity(data)
+    funghi_permutations = gen_funghi_permutations(
+        data, total_adventure_capacity, total_funghi_capacity)
+    funghi_allocations = convert_permutations_to_allocations(
+        data, funghi_permutations)
+    calc_allocations_scores(data, funghi_allocations, qualified_funghis)
 
 
 if __name__ == '__main__':
