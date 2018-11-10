@@ -3,7 +3,7 @@
   name: 菇菇
   count: 1
   stats:
-    endurance: 110
+    vitality: 110
     intelligence: 110
     speed: 110
   skills:
@@ -13,7 +13,7 @@
   name: 小白菇菇
   count: 1
   stats:
-    endurance: 160
+    vitality: 160
     intelligence: 100
     speed: 100
   skills:
@@ -22,7 +22,7 @@
   name: 惡魔菇菇
   count: 1
   stats:
-    endurance: 75
+    vitality: 75
     intelligence: 80
     speed: 120
   skills:
@@ -32,7 +32,7 @@
   name: 偽裝菇菇
   count: 1
   stats:
-    endurance: 95
+    vitality: 95
     intelligence: 125
     speed: 95
   skills:

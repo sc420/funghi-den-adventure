@@ -1,7 +1,21 @@
 import yaml
 
+# STAT_NAMES = ['vitality', 'intelligence', 'speed']
+# SKILL_NAMES = ['luck', 'insensitive', 'horn', 'agile', 'night_eyes', 'stealth',
+#                'cute', 'food', 'swimmer', 'big_eater', 'short_range_attack',
+#                'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
+#                'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
+#                'poison', 'courage', 'smart', 'iron_fist', 'sensor']
+# SPEC = {
+#     'stats': STAT_NAMES,
+#     'skills': SKILL_NAMES,
+#     'boosts': SKILL_NAMES,
+# }
+# REQUIRED_SPEC_NAMES = ['stats', 'skills', 'boosts']
 
-SPECS = ['stats', 'skills']
+REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
+REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
+CHECK_QUALIFICATION_SPEC_NAMES = ['stats', 'skills']
 
 
 def load_data():
@@ -27,16 +41,16 @@ def normalize_adventures(adventures):
     for adventure in adventures.values():
         requirements = adventure['requirements']
         for requirement in requirements.values():
-            for spec in SPECS:
-                if not spec in requirement:
-                    requirement[spec] = []
+            for spec_name in REQUIRED_ADVENTURE_SPEC_NAMES:
+                if not spec_name in requirement:
+                    requirement[spec_name] = []
 
 
 def normalize_funghis(funghis):
     for funghi in funghis.values():
-        for spec in SPECS:
-            if not spec in funghi:
-                funghi[spec] = []
+        for spec_name in REQUIRED_FUNGHI_SPEC_NAMES:
+            if not spec_name in funghi:
+                funghi[spec_name] = []
 
 
 def filter_qualified_funghis(data):
@@ -56,17 +70,25 @@ def filter_qualified_funghis(data):
 
 
 def is_funghi_qualified_for_requirement(funghi, requirement):
-    # Check whether there is any funghi available
+    # If the funghi is not available, it is not qualified
     if funghi['count'] <= 0:
         return False
     # Check the stats and skills
-    for spec in SPECS:
-        funghi_abilities = funghi[spec]
-        req_abilities = requirement[spec]
-        for req_obj in req_abilities:
+    for spec_name in CHECK_QUALIFICATION_SPEC_NAMES:
+        funghi_spec = funghi[spec_name]
+        req_spec = requirement[spec_name]
+        for req_obj in req_spec:
             for name, value in req_obj.items():
-                if value > funghi_abilities[name]:
+                # If the funghi has no corresponding second-level spec name, it
+                # is not qualified
+                if not name in funghi_spec:
                     return False
+                # If the value is a list, ignore it
+                if not isinstance(value, list):
+                    # If the requirement value is higher than the funghi value,
+                    # it is not qualified
+                    if value > funghi_spec[name]:
+                        return False
     # The test has passed, the funghi is qualified
     return True
 
