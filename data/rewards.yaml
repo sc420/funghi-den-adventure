@@ -1,0 +1,10 @@
+# Specify the importance of rewards in this file
+1:
+  name: hard_clay
+  importance: 1.0
+1001:
+  name: twirly_root
+  importance: 1.0
+1002:
+  name: mole_claw
+  importance: 1.0

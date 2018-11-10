@@ -1,0 +1,48 @@
+# References:
+# http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
+1:
+  name: 鼴鼠之洞(入口)
+  funghi_capacity: 1
+  requirements:
+    1:
+      name: 柔軟道路
+      stats:
+      - endurance: 10
+      rewards:
+      - hard_clay: 1
+    2:
+      name: 昏暗道路
+      stats:
+      - endurance: 10
+      rewards:
+      - twirly_root: 1
+    3:
+      name: 凹凸道路
+      stats:
+      - intelligence: 10
+      rewards:
+      - hard_clay: 1
+    4:
+      name: 潮濕道路
+      stats:
+      - speed: 10
+      rewards:
+      - twirly_root: 1
+    5:
+      name: 狹窄道路
+      stats:
+      - intelligence: 12
+      rewards:
+      - twirly_root: 2
+    6:
+      name: 擋路的岩石
+      stats:
+      - endurance: 20
+      rewards:
+      - hard_clay: 1
+    7:
+      name: 惡臭橫洞
+      stats:
+      - speed: 20
+      rewards:
+      - mole_claw: 1

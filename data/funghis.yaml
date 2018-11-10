@@ -1,0 +1,39 @@
+# Reference: http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Library
+1:
+  name: 菇菇
+  count: 1
+  stats:
+    endurance: 110
+    intelligence: 110
+    speed: 110
+  skills:
+    luck: 1
+    hard_head: 1
+3:
+  name: 小白菇菇
+  count: 1
+  stats:
+    endurance: 160
+    intelligence: 100
+    speed: 100
+  skills:
+    insensitive: 1
+4:
+  name: 惡魔菇菇
+  count: 1
+  stats:
+    endurance: 75
+    intelligence: 80
+    speed: 120
+  skills:
+    horn: 1
+    hard_head: 1
+5:
+  name: 偽裝菇菇
+  count: 1
+  stats:
+    endurance: 95
+    intelligence: 125
+    speed: 95
+  skills:
+    swimmer: 1
