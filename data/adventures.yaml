@@ -2,7 +2,7 @@
 # http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
 1:
   name: 鼴鼠之洞(入口)
-  funghi_capacity: 1
+  capacity: 1
   requirements:
     1:
       name: 柔軟道路
@@ -48,7 +48,7 @@
       - mole_claw: 1
 2:
   name: 鼴鼠之洞(中途)
-  funghi_capacity: 3
+  capacity: 3
   requirements:
     1:
       name: 柔軟道路

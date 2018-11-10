@@ -1,7 +1,7 @@
 # Reference: http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Library
 1:
   name: 菇菇
-  count: 1
+  capacity: 1
   stats:
     vitality: 110
     intelligence: 110
@@ -11,7 +11,7 @@
     hard_head: 1
 3:
   name: 小白菇菇
-  count: 1
+  capacity: 1
   stats:
     vitality: 160
     intelligence: 100
@@ -20,7 +20,7 @@
     insensitive: 1
 4:
   name: 惡魔菇菇
-  count: 1
+  capacity: 1
   stats:
     vitality: 75
     intelligence: 80
@@ -30,7 +30,7 @@
     hard_head: 1
 5:
   name: 偽裝菇菇
-  count: 1
+  capacity: 1
   stats:
     vitality: 95
     intelligence: 125

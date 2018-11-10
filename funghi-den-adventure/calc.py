@@ -1,3 +1,4 @@
+import itertools
 import yaml
 
 # STAT_NAMES = ['vitality', 'intelligence', 'speed']
@@ -71,7 +72,7 @@ def filter_qualified_funghis(data):
 
 def is_funghi_qualified_for_requirement(funghi, requirement):
     # If the funghi is not available, it is not qualified
-    if funghi['count'] <= 0:
+    if funghi['capacity'] <= 0:
         return False
     # Check the stats and skills
     for spec_name in CHECK_QUALIFICATION_SPEC_NAMES:
@@ -93,11 +94,36 @@ def is_funghi_qualified_for_requirement(funghi, requirement):
     return True
 
 
+def calc_total_adventure_capacities(data):
+    count = 0
+    adventures = data['adventures']
+    for adventure in adventures.values():
+        count += adventure['capacity']
+    return count
+
+
+def gen_funghi_permutations(data, total_capacity):
+    candidates = []
+    funghis = data['funghis']
+    for funghi_id, funghi in funghis.items():
+        fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
+        candidates.append(*list(fungi_repeated_ids))
+    return itertools.permutations(candidates, total_capacity)
+
+
+def calc_funghi_permutations_scores(data, funghi_permutations, qualified_funghis):
+    for permutation in funghi_permutations:
+        print(permutation)
+
+
 def main():
     data = load_data()
     normalize_data(data)
     qualified_funghis = filter_qualified_funghis(data)
-    print(qualified_funghis)
+    total_capacity = calc_total_adventure_capacities(data)
+    funghi_permutations = gen_funghi_permutations(data, total_capacity)
+    calc_funghi_permutations_scores(
+        data, funghi_permutations, qualified_funghis)
 
 
 if __name__ == '__main__':
