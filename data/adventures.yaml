@@ -1,4 +1,14 @@
+# Specify adventures in this file
+#
+# All stats: ['vitality', 'intelligence', 'speed']
+# All skills: ['luck', 'insensitive', 'horn', 'agile', 'night_eyes', 'stealth',
+#              'cute', 'food', 'swimmer', 'big_eater', 'short_range_attack',
+#              'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
+#              'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
+#              'poison', 'courage', 'smart', 'iron_fist', 'sensor']
+#
 # Reference: http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
+
 1:
   name: 鼴鼠之洞(入口)
   capacity: 1
@@ -45,6 +55,8 @@
       - speed: 20
       rewards:
         mole_claw: 1
+  perfect_rewards:
+    mole_claw: 1
 2:
   name: 鼴鼠之洞(中途)
   capacity: 3
@@ -150,6 +162,8 @@
       - stealth: 1
       rewards:
         root_ball: 1
+  perfect_rewards:
+    mole_tale: 2
 3:
   name: 岩石隧道
   capacity: 2
@@ -245,3 +259,5 @@
           vitality: 50
       rewards:
         square_stone: 1
+  perfect_rewards:
+    reversible_stone: 2

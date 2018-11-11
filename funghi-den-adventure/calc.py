@@ -2,13 +2,6 @@ import copy
 import itertools
 import yaml
 
-# STAT_NAMES = ['vitality', 'intelligence', 'speed']
-# SKILL_NAMES = ['luck', 'insensitive', 'horn', 'agile', 'night_eyes', 'stealth',
-#                'cute', 'food', 'swimmer', 'big_eater', 'short_range_attack',
-#                'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
-#                'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
-#                'poison', 'courage', 'smart', 'iron_fist', 'sensor']
-
 REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
 REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
 EMPTY_ID = -1
@@ -132,6 +125,7 @@ def calc_allocations_scores(data, funghi_allocations):
                 adventure = adventures[adventure_id]
                 requirements = adventure['requirements']
                 # Look through each requirement
+                all_requirements_met = True
                 for requirement in requirements.values():
                     augmented_funghis = gen_augmented_funghis(
                         requirement, allocated_funghis)
@@ -140,7 +134,14 @@ def calc_allocations_scores(data, funghi_allocations):
                         is_reduce_requirement_met(
                             data, requirement, augmented_funghis)
                     if requirement_met:
-                        score += calc_weighted_score(rewards, requirement)
+                        req_rewards = requirement['rewards']
+                        score += calc_weighted_score(rewards, req_rewards)
+                    else:
+                        all_requirements_met = False
+                # Add score of perfect reward if all requirements are met
+                if all_requirements_met:
+                    req_rewards = adventure['perfect_rewards']
+                    score += calc_weighted_score(rewards, req_rewards)
         scores.append(score)
     return scores
 
@@ -241,9 +242,8 @@ def gen_augmented_funghis(requirement, allocated_funghis):
         return copy.deepcopy(allocated_funghis)
 
 
-def calc_weighted_score(rewards, requirement):
+def calc_weighted_score(rewards, req_rewards):
     score = 0.0
-    req_rewards = requirement['rewards']
     for req_reward_name, req_reward_value in req_rewards.items():
         if req_reward_name in rewards:
             score += rewards[req_reward_name] * req_reward_value
