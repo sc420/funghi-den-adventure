@@ -1,10 +1,6 @@
 # Specify the importance of rewards in this file
-1:
-  name: hard_clay
-  importance: 1.0
-1001:
-  name: twirly_root
-  importance: 1.0
-1002:
-  name: mole_claw
-  importance: 1.0
+hard_clay: 1.0
+
+twirly_root: 1.0
+mole_claw: 1.0
+root_ball: 10.0
