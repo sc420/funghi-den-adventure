@@ -120,15 +120,17 @@ def discard_repeated_allocations(funghi_allocations):
     return new_allocations
 
 
-def calc_allocations_scores(data, funghi_allocations):
-    scores = []
+def calc_allocations_results(data, funghi_allocations):
+    results = []
     adventures = data['adventures']
     rewards = data['rewards']
     # Calculate score for each allocation
     for funghi_allocation in funghi_allocations:
+        score = 0.0
+        success_count = 0
+        requirement_count = 0
         # Look through each adventure
         for adventure_id, adventure_allocation in funghi_allocation.items():
-            score = 0.0
             # If an empty funghi is in the allocation, the adventure fails
             if not EMPTY_ID in adventure_allocation:
                 allocated_funghis = gen_allocated_funghis(
@@ -149,14 +151,20 @@ def calc_allocations_scores(data, funghi_allocations):
                     if requirement_met:
                         req_rewards = requirement['rewards']
                         score += calc_weighted_score(rewards, req_rewards)
+                        success_count += 1
                     else:
                         all_requirements_met = False
+                    requirement_count += 1
                 # Add score of perfect reward if all requirements are met
                 if all_requirements_met:
                     req_rewards = adventure['perfect_rewards']
                     score += calc_weighted_score(rewards, req_rewards)
-        scores.append(score)
-    return scores
+        results.append({
+            'score': score,
+            'success_count': success_count,
+            'requirement_count': requirement_count,
+        })
+    return results
 
 
 def gen_allocated_funghis(data, adventure_allocation):
@@ -263,16 +271,22 @@ def calc_weighted_score(rewards, req_rewards):
     return score
 
 
-def list_best_allocations(data, funghi_allocations, scores):
+def list_best_allocations(data, funghi_allocations, results):
+    scores = [result['score'] for result in results]
     max_score = max(scores)
     # Print the max score
     print('Max score: {}'.format(max_score))
     # List all allocations of the max score
     print('Best allocations:')
     idx = 0
-    for funghi_allocation, score in zip(funghi_allocations, scores):
+    for funghi_allocation, result in zip(funghi_allocations, results):
+        score = result['score']
+        success_count = result['success_count']
+        requirement_count = result['requirement_count']
+        success_rate = success_count / requirement_count * 100.0
         if score >= max_score:
             print('#{}'.format(idx + 1))
+            print('Success rate: {:.2f}%'.format(success_rate))
             print_best_allocation(data, funghi_allocation)
             print()
             idx += 1
@@ -304,8 +318,8 @@ def main():
     funghi_allocations = convert_permutations_to_allocations(
         data, funghi_permutations)
     funghi_allocations = discard_repeated_allocations(funghi_allocations)
-    scores = calc_allocations_scores(data, funghi_allocations)
-    list_best_allocations(data, funghi_allocations, scores)
+    results = calc_allocations_results(data, funghi_allocations)
+    list_best_allocations(data, funghi_allocations, results)
 
 
 if __name__ == '__main__':
