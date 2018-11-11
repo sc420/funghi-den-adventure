@@ -1,6 +1,12 @@
 # Specify the importance of rewards in this file
-hard_clay: 1.0
 
+# Items
+hard_clay: 1.0
+hard_rock: 1.0
+
+# Treasures
 twirly_root: 1.0
 mole_claw: 1.0
 root_ball: 1.0
+square_stone: 1.0
+reversible_stone: 1.0
