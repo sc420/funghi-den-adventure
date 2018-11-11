@@ -110,20 +110,22 @@ def calc_allocations_scores(data, funghi_allocations):
         # Look through each adventure
         for adventure_id, adventure_allocation in funghi_allocation.items():
             score = 0.0
-            allocated_funghis = gen_allocated_funghis(
-                data, adventure_allocation)
-            adventure = adventures[adventure_id]
-            requirements = adventure['requirements']
-            # Look through each requirement
-            for requirement in requirements.values():
-                augmented_funghis = gen_augmented_funghis(
-                    requirement, allocated_funghis)
-                requirement_met = is_non_reduce_requirement_met(
-                    data, requirement, augmented_funghis) or \
-                    is_reduce_requirement_met(
-                        data, requirement, augmented_funghis)
-                if requirement_met:
-                    score += calc_weighted_score(rewards, requirement)
+            # If an empty funghi is in the allocation, the adventure fails
+            if not EMPTY_ID in adventure_allocation:
+                allocated_funghis = gen_allocated_funghis(
+                    data, adventure_allocation)
+                adventure = adventures[adventure_id]
+                requirements = adventure['requirements']
+                # Look through each requirement
+                for requirement in requirements.values():
+                    augmented_funghis = gen_augmented_funghis(
+                        requirement, allocated_funghis)
+                    requirement_met = is_non_reduce_requirement_met(
+                        data, requirement, augmented_funghis) or \
+                        is_reduce_requirement_met(
+                            data, requirement, augmented_funghis)
+                    if requirement_met:
+                        score += calc_weighted_score(rewards, requirement)
             scores.append(score)
     return scores
 
