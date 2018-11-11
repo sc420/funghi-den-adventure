@@ -28,12 +28,12 @@
   skills:
     horn: 1
     hard_head: 1
-# 5:
-#   name: 偽裝菇菇
-#   capacity: 1
-#   stats:
-#     vitality: 95
-#     intelligence: 125
-#     speed: 95
-#   skills:
-#     swimmer: 1
+5:
+  name: 偽裝菇菇
+  capacity: 1
+  stats:
+    vitality: 95
+    intelligence: 125
+    speed: 95
+  skills:
+    swimmer: 1

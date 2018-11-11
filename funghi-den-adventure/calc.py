@@ -77,12 +77,12 @@ def gen_funghi_permutations(data, adventure_capacity, funghi_capacity):
     funghis = data['funghis']
     for funghi_id, funghi in funghis.items():
         fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
-        candidates.append(*list(fungi_repeated_ids))
+        candidates.extend(list(fungi_repeated_ids))
     # If there are not enough funghis, generate empty funghis
     if funghi_capacity < adventure_capacity:
         empty_size = adventure_capacity - funghi_capacity
         empty_repeated_ids = itertools.repeat(EMPTY_ID, empty_size)
-        candidates.append(*list(empty_repeated_ids))
+        candidates.extend(list(empty_repeated_ids))
     return itertools.permutations(candidates, adventure_capacity)
 
 
@@ -99,6 +99,21 @@ def convert_permutations_to_allocations(data, funghi_permutations):
             ofs_start = ofs_end
         allocations.append(allocation)
     return allocations
+
+
+def discard_repeated_allocations(funghi_allocations):
+    new_allocations = []
+    for funghi_allocation in funghi_allocations:
+        keep = True
+        for adventure_allocation in funghi_allocation.values():
+            # Do not keep the allocation if the order is not sorted in it
+            sorted_adventure_allocation = sorted(adventure_allocation)
+            if list(adventure_allocation) != sorted_adventure_allocation:
+                keep = False
+                break
+        if keep:
+            new_allocations.append(funghi_allocation)
+    return new_allocations
 
 
 def calc_allocations_scores(data, funghi_allocations):
@@ -126,7 +141,7 @@ def calc_allocations_scores(data, funghi_allocations):
                             data, requirement, augmented_funghis)
                     if requirement_met:
                         score += calc_weighted_score(rewards, requirement)
-            scores.append(score)
+        scores.append(score)
     return scores
 
 
@@ -235,6 +250,36 @@ def calc_weighted_score(rewards, requirement):
     return score
 
 
+def list_best_allocations(data, funghi_allocations, scores):
+    max_score = max(scores)
+    # Print the max score
+    print('Max score: {}'.format(max_score))
+    # List all allocations of the max score
+    print('Best allocations:')
+    idx = 0
+    for funghi_allocation, score in zip(funghi_allocations, scores):
+        if score >= max_score:
+            print('#{}'.format(idx + 1))
+            print_best_allocation(data, funghi_allocation)
+            print()
+            idx += 1
+
+
+def print_best_allocation(data, funghi_allocation):
+    adventures = data['adventures']
+    funghis = data['funghis']
+    for adventure_id, adventure_allocation in funghi_allocation.items():
+        adventure = adventures[adventure_id]
+        funghi_names = []
+        for funghi_id in adventure_allocation:
+            if funghi_id == EMPTY_ID:
+                funghi_names.append(EMPTY_FUNGHI['name'])
+            else:
+                funghi = funghis[funghi_id]
+                funghi_names.append(funghi['name'])
+        print('{}: {}'.format(adventure['name'], ', '.join(funghi_names)))
+
+
 def main():
     data = load_data()
     normalize_data(data)
@@ -244,8 +289,9 @@ def main():
         data, total_adventure_capacity, total_funghi_capacity)
     funghi_allocations = convert_permutations_to_allocations(
         data, funghi_permutations)
+    funghi_allocations = discard_repeated_allocations(funghi_allocations)
     scores = calc_allocations_scores(data, funghi_allocations)
-    print(scores)
+    list_best_allocations(data, funghi_allocations, scores)
 
 
 if __name__ == '__main__':
