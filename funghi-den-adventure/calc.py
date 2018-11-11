@@ -1,5 +1,7 @@
+import argparse
 import copy
 import itertools
+import os
 import yaml
 
 REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
@@ -13,12 +15,21 @@ EMPTY_FUNGHI = {
 }
 
 
-def load_data():
-    with open('data/adventures.yaml', 'r', encoding='utf8') as stream:
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data_dir', help='data directory')
+    return parser.parse_args()
+
+
+def load_data(args):
+    adventures_path = os.path.join(args.data_dir, 'adventures.yaml')
+    funghis_path = os.path.join(args.data_dir, 'funghis.yaml')
+    rewards_path = os.path.join(args.data_dir, 'rewards.yaml')
+    with open(adventures_path, 'r', encoding='utf8') as stream:
         adventures = yaml.load(stream)
-    with open('data/funghis.yaml', 'r', encoding='utf8') as stream:
+    with open(funghis_path, 'r', encoding='utf8') as stream:
         funghis = yaml.load(stream)
-    with open('data/rewards.yaml', 'r', encoding='utf8') as stream:
+    with open(rewards_path, 'r', encoding='utf8') as stream:
         rewards = yaml.load(stream)
     return {
         'adventures': adventures,
@@ -130,7 +141,9 @@ def calc_allocations_scores(data, funghi_allocations):
                     augmented_funghis = gen_augmented_funghis(
                         requirement, allocated_funghis)
                     requirement_met = is_non_reduce_requirement_met(
-                        data, requirement, augmented_funghis) or \
+                        data, requirement, augmented_funghis, 'stats') and \
+                        is_non_reduce_requirement_met(
+                        data, requirement, augmented_funghis, 'skills') and \
                         is_reduce_requirement_met(
                             data, requirement, augmented_funghis)
                     if requirement_met:
@@ -157,21 +170,21 @@ def gen_allocated_funghis(data, adventure_allocation):
     return allocated_funghis
 
 
-def is_non_reduce_requirement_met(data, requirement, augmented_funghis):
-    # Generate permutations such that each stat is paired to a funghis
-    req_stats = requirement['stats']
-    is_met = False
-    stats_permutations = itertools.permutations(
-        augmented_funghis, len(req_stats))
+def is_non_reduce_requirement_met(data, requirement, augmented_funghis, spec):
+    # Generate permutations such that each spec is paired to a funghis
+    req_specs = requirement[spec]
+    is_met = True
+    specs_permutations = itertools.permutations(
+        augmented_funghis, len(req_specs))
     # Try each permutation
-    for permutated_funghis in stats_permutations:
-        # Specify each stat object to a funghi
-        for req_stat_obj, funghi in zip(req_stats, permutated_funghis):
-            funghi_stats = funghi['stats']
-            # The funghi has to pass all the stats
-            for stat_name, stat_value in req_stat_obj.items():
-                if stat_name in funghi_stats and \
-                        funghi_stats[stat_name] >= stat_value:
+    for permutated_funghis in specs_permutations:
+        # Specify each spec object to a funghi
+        for req_spec_obj, funghi in zip(req_specs, permutated_funghis):
+            funghi_specs = funghi[spec]
+            # The funghi has to pass all the specs
+            for spec_name, spec_value in req_spec_obj.items():
+                if spec_name in funghi_specs and \
+                        funghi_specs[spec_name] >= spec_value:
                     is_met = True
                 else:
                     is_met = False
@@ -187,7 +200,7 @@ def is_non_reduce_requirement_met(data, requirement, augmented_funghis):
 
 def is_reduce_requirement_met(data, requirement, augmented_funghis):
     if not 'reduce_stats' in requirement:
-        return False
+        return True
     req_reduce_stats = requirement['reduce_stats']
     # Check each reduce stats
     for stat_name, reduce_target in req_reduce_stats.items():
@@ -281,7 +294,8 @@ def print_best_allocation(data, funghi_allocation):
 
 
 def main():
-    data = load_data()
+    args = parse_args()
+    data = load_data(args)
     normalize_data(data)
     total_adventure_capacity = calc_total_adventure_capacity(data)
     total_funghi_capacity = calc_total_funghi_capacity(data)
