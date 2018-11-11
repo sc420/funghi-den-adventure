@@ -75,49 +75,89 @@ def calc_total_funghi_capacity(data):
     return count
 
 
-def gen_funghi_permutations(data, adventure_capacity, funghi_capacity):
+def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
+    """Generate funghi combinations.
+
+    For example, if the funghis are (1, 2, 3, 4) and the adventure capacities
+    are (1, 2), then the combinations will be [((1), (2, 3)), ((1), (2, 4)),
+    ((1), (3, 4)), ((2), (1, 3)), ((2), (1, 4)), ((2), (3, 4)), ...,
+    ((4), (1, 2)), ((4), (1, 3)), ((4), (2, 3))]
+    Empty funghis will be generated if there are not enough funghis for
+    allocations.
+    """
     candidates = []
     # Generate funghi candidates
     funghis = data['funghis']
     for funghi_id, funghi in funghis.items():
         fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
         candidates.extend(list(fungi_repeated_ids))
-    # If there are not enough funghis, generate empty funghis
+    # If there are not enough funghis, generate negative IDs as empty funghis
     if funghi_capacity < adventure_capacity:
         empty_size = adventure_capacity - funghi_capacity
-        empty_repeated_ids = itertools.repeat(EMPTY_ID, empty_size)
-        candidates.extend(list(empty_repeated_ids))
-    return itertools.permutations(candidates, adventure_capacity)
+        for i in range(-1, -1 * (empty_size + 1), -1):
+            candidates.append(i)
+    # Generate combinations of funghis in each adventure, then proceed with the
+    # remaining unused funghis
+    adventures = data['adventures']
+    adventures_values = list(adventures.values())
+    generators = []
+    candidates_list = []
+    remaining_list = []
+    # Add the generator for the first adventure
+    first_adventure = adventures_values[0]
+    local_capacity = first_adventure['capacity']
+    local_comb = itertools.combinations(candidates, local_capacity)
+    generators.append(local_comb)
+    # Add dummy candidates
+    candidates_list.append([])
+    # Add the original candidates in the remaining list
+    remaining_list.append(set(candidates))
+    # Generate combinations
+    while len(generators) > 0:
+        next_idx = len(generators)
+        local_candidates = next(generators[-1], None)
+        if local_candidates is None:
+            generators.pop()
+            candidates_list.pop()
+            remaining_list.pop()
+        else:
+            candidates_list.append(local_candidates)
+            remaining_candidates = remaining_list[next_idx - 1] - \
+                set(local_candidates)
+            if len(remaining_candidates) == 0 or \
+                    next_idx >= len(adventures_values):
+                output = []
+                for candidates_item in candidates_list:
+                    output.extend(candidates_item)
+                # Convert negative IDs to empty IDs
+                output = [n if n >= 0 else EMPTY_ID for n in output]
+                yield output
+                candidates_list.pop()
+            else:
+                # Add next generator
+                next_adventure = adventures_values[next_idx]
+                local_capacity = next_adventure['capacity']
+                sorted_remaining_candidates = sorted(remaining_candidates)
+                local_comb = itertools.combinations(
+                    sorted_remaining_candidates, local_capacity)
+                generators.append(local_comb)
+                # Add next remaining candidates
+                remaining_list.append(remaining_candidates)
 
 
-def convert_permutations_to_allocations(data, funghi_permutations):
+def convert_combinations_to_allocations(data, funghi_combinations):
     allocations = []
     adventures = data['adventures']
-    for permutation in funghi_permutations:
+    for combination in funghi_combinations:
         allocation = {}
         ofs_start = 0
         for adventure_id, adventure in adventures.items():
             capacity = adventure['capacity']
             ofs_end = ofs_start + capacity
-            allocation[adventure_id] = permutation[ofs_start:ofs_end]
+            allocation[adventure_id] = combination[ofs_start:ofs_end]
             ofs_start = ofs_end
         allocations.append(allocation)
     return allocations
-
-
-def discard_repeated_allocations(funghi_allocations):
-    new_allocations = []
-    for funghi_allocation in funghi_allocations:
-        keep = True
-        for adventure_allocation in funghi_allocation.values():
-            # Do not keep the allocation if the order is not sorted in it
-            sorted_adventure_allocation = sorted(adventure_allocation)
-            if list(adventure_allocation) != sorted_adventure_allocation:
-                keep = False
-                break
-        if keep:
-            new_allocations.append(funghi_allocation)
-    return new_allocations
 
 
 def calc_allocations_results(data, funghi_allocations):
@@ -283,7 +323,10 @@ def list_best_allocations(data, funghi_allocations, results):
         score = result['score']
         success_count = result['success_count']
         requirement_count = result['requirement_count']
-        success_rate = success_count / requirement_count * 100.0
+        if requirement_count > 0:
+            success_rate = success_count / requirement_count * 100.0
+        else:
+            success_rate = 0.0
         if score >= max_score:
             print('#{}'.format(idx + 1))
             print('Success rate: {:.2f}%'.format(success_rate))
@@ -313,11 +356,10 @@ def main():
     normalize_data(data)
     total_adventure_capacity = calc_total_adventure_capacity(data)
     total_funghi_capacity = calc_total_funghi_capacity(data)
-    funghi_permutations = gen_funghi_permutations(
+    funghi_combinations = gen_funghi_combinations(
         data, total_adventure_capacity, total_funghi_capacity)
-    funghi_allocations = convert_permutations_to_allocations(
-        data, funghi_permutations)
-    funghi_allocations = discard_repeated_allocations(funghi_allocations)
+    funghi_allocations = convert_combinations_to_allocations(
+        data, funghi_combinations)
     results = calc_allocations_results(data, funghi_allocations)
     list_best_allocations(data, funghi_allocations, results)
 
