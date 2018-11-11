@@ -8,16 +8,9 @@ import yaml
 #                'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
 #                'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
 #                'poison', 'courage', 'smart', 'iron_fist', 'sensor']
-# SPEC = {
-#     'stats': STAT_NAMES,
-#     'skills': SKILL_NAMES,
-#     'boosts': SKILL_NAMES,
-# }
-# REQUIRED_SPEC_NAMES = ['stats', 'skills', 'boosts']
 
 REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
 REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
-CHECK_QUALIFICATION_SPEC_NAMES = ['stats', 'skills']
 EMPTY_ID = -1
 EMPTY_FUNGHI = {
     'capacity': 0,
@@ -60,44 +53,6 @@ def normalize_funghis(funghis):
         for spec_name in REQUIRED_FUNGHI_SPEC_NAMES:
             if not spec_name in funghi:
                 funghi[spec_name] = []
-
-
-def filter_qualified_funghis(data):
-    qualified_funghis = {}
-    adventures = data['adventures']
-    funghis = data['funghis']
-    for adventure_id, adventure in adventures.items():
-        requirements = adventure['requirements']
-        per_adventure = {}
-        for requirement_id, requirement in requirements.items():
-            per_adventure[requirement_id] = []
-            for funghi_id, funghi in funghis.items():
-                if is_funghi_qualified_for_requirement(funghi, requirement):
-                    per_adventure[requirement_id].append(funghi_id)
-        qualified_funghis[adventure_id] = per_adventure
-    return qualified_funghis
-
-
-def is_funghi_qualified_for_requirement(funghi, requirement):
-    # If the funghi is not available, it is not qualified
-    if funghi['capacity'] <= 0:
-        return False
-    # Check the stats and skills
-    for spec_name in CHECK_QUALIFICATION_SPEC_NAMES:
-        funghi_spec = funghi[spec_name]
-        req_spec = requirement[spec_name]
-        for req_obj in req_spec:
-            for name, value in req_obj.items():
-                # If the funghi has no corresponding second-level spec name, it
-                # is not qualified
-                if not name in funghi_spec:
-                    return False
-                # If the requirement value is higher than the funghi value,
-                # it is not qualified
-                if value > funghi_spec[name]:
-                    return False
-    # The test has passed, the funghi is qualified
-    return True
 
 
 def calc_total_adventure_capacity(data):
@@ -146,7 +101,7 @@ def convert_permutations_to_allocations(data, funghi_permutations):
     return allocations
 
 
-def calc_allocations_scores(data, funghi_allocations, qualified_funghis):
+def calc_allocations_scores(data, funghi_allocations):
     scores = []
     adventures = data['adventures']
     rewards = data['rewards']
@@ -281,15 +236,13 @@ def calc_weighted_score(rewards, requirement):
 def main():
     data = load_data()
     normalize_data(data)
-    qualified_funghis = filter_qualified_funghis(data)
     total_adventure_capacity = calc_total_adventure_capacity(data)
     total_funghi_capacity = calc_total_funghi_capacity(data)
     funghi_permutations = gen_funghi_permutations(
         data, total_adventure_capacity, total_funghi_capacity)
     funghi_allocations = convert_permutations_to_allocations(
         data, funghi_permutations)
-    scores = calc_allocations_scores(data, funghi_allocations,
-                                     qualified_funghis)
+    scores = calc_allocations_scores(data, funghi_allocations)
     print(scores)
 
 
