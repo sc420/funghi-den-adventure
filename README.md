@@ -11,5 +11,5 @@ See comments in `data/all/*.yaml`.
 ## Examples
 
 ```shell
-python funghi-den-adventure/calc.py --data_dir=data/砂牆空洞-沙沙通道
+python main.py --data_dir=data/砂牆空洞-沙沙通道
 ```

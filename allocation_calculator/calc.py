@@ -1,8 +1,5 @@
-import argparse
 import copy
 import itertools
-import os
-import yaml
 
 REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills']
 REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
@@ -13,29 +10,6 @@ EMPTY_FUNGHI = {
     'stats': [],
     'skills': [],
 }
-
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--data_dir', help='data directory')
-    return parser.parse_args()
-
-
-def load_data(args):
-    adventures_path = os.path.join(args.data_dir, 'adventures.yaml')
-    funghis_path = os.path.join(args.data_dir, 'funghis.yaml')
-    rewards_path = os.path.join(args.data_dir, 'rewards.yaml')
-    with open(adventures_path, 'r', encoding='utf8') as stream:
-        adventures = yaml.load(stream)
-    with open(funghis_path, 'r', encoding='utf8') as stream:
-        funghis = yaml.load(stream)
-    with open(rewards_path, 'r', encoding='utf8') as stream:
-        rewards = yaml.load(stream)
-    return {
-        'adventures': adventures,
-        'funghis': funghis,
-        'rewards': rewards,
-    }
 
 
 def normalize_data(data):
@@ -366,21 +340,3 @@ def print_best_allocation(data, funghi_allocation):
                 funghi = funghis[funghi_id]
                 funghi_names.append(funghi['name'])
         print('{}: {}'.format(adventure['name'], ', '.join(funghi_names)))
-
-
-def main():
-    args = parse_args()
-    data = load_data(args)
-    normalize_data(data)
-    total_adventure_capacity = calc_total_adventure_capacity(data)
-    total_funghi_capacity = calc_total_funghi_capacity(data)
-    funghi_combinations = gen_funghi_combinations(
-        data, total_adventure_capacity, total_funghi_capacity)
-    funghi_allocations = convert_combinations_to_allocations(
-        data, funghi_combinations)
-    results = calc_allocations_results(data, funghi_allocations)
-    list_best_allocations(data, funghi_allocations, results)
-
-
-if __name__ == '__main__':
-    main()
