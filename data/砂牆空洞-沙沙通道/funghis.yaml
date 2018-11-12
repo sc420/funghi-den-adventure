@@ -6,7 +6,7 @@
   stats:
     vitality: 115
     intelligence: 115
-    speed: 110
+    speed: 115
   skills:
     luck: 1
     hard_head: 1
@@ -25,7 +25,7 @@
   capacity: 1
   stats:
     vitality: 185
-    intelligence: 90
+    intelligence: 95
     speed: 110
   skills:
     luck: 1
@@ -36,16 +36,16 @@
   stats:
     vitality: 100
     intelligence: 90
-    speed: 140
+    speed: 150
   skills:
     short_range_attack: 1
 17:
   name: 小辣椒菇菇
   capacity: 1
   stats:
-    vitality: 95
-    intelligence: 115
-    speed: 165
+    vitality: 100
+    intelligence: 120
+    speed: 175
   skills:
     food: 1
     courage: 1
@@ -54,9 +54,9 @@
   name: 野貓菇菇
   capacity: 1
   stats:
-    vitality: 90
-    intelligence: 50
-    speed: 140
+    vitality: 100
+    intelligence: 55
+    speed: 145
   skills:
     agile: 1
     night_eyes: 1
@@ -66,7 +66,7 @@
   stats:
     vitality: 170
     intelligence: 105
-    speed: 95
+    speed: 105
   skills:
     agile: 1
 23:
@@ -117,9 +117,9 @@
   name: 頭巾菇菇
   capacity: 1
   stats:
-    vitality: 90
-    intelligence: 130
-    speed: 90
+    vitality: 95
+    intelligence: 140
+    speed: 95
   skills:
     luck: 1
     courage: 1

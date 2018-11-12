@@ -6,7 +6,7 @@
   stats:
     vitality: 115
     intelligence: 115
-    speed: 110
+    speed: 115
   skills:
     luck: 1
     hard_head: 1
@@ -38,7 +38,7 @@
   stats:
     vitality: 170
     intelligence: 105
-    speed: 95
+    speed: 105
   skills:
     agile: 1
 25:
