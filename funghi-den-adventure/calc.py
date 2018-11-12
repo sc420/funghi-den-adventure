@@ -4,7 +4,7 @@ import itertools
 import os
 import yaml
 
-REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills', 'boosts']
+REQUIRED_ADVENTURE_SPEC_NAMES = ['stats', 'skills']
 REQUIRED_FUNGHI_SPEC_NAMES = ['stats', 'skills']
 EMPTY_ID = -1
 EMPTY_FUNGHI = {
@@ -48,14 +48,14 @@ def normalize_adventures(adventures):
         requirements = adventure['requirements']
         for requirement in requirements.values():
             for spec_name in REQUIRED_ADVENTURE_SPEC_NAMES:
-                if not spec_name in requirement:
+                if spec_name not in requirement:
                     requirement[spec_name] = []
 
 
 def normalize_funghis(funghis):
     for funghi in funghis.values():
         for spec_name in REQUIRED_FUNGHI_SPEC_NAMES:
-            if not spec_name in funghi:
+            if spec_name not in funghi:
                 funghi[spec_name] = []
 
 
@@ -92,6 +92,7 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
         fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
         candidates.extend(list(fungi_repeated_ids))
     # If there are not enough funghis, generate negative IDs as empty funghis
+    # TODO: It would fail if there are multiple funghis
     if funghi_capacity < adventure_capacity:
         empty_size = adventure_capacity - funghi_capacity
         for i in range(-1, -1 * (empty_size + 1), -1):
@@ -172,33 +173,34 @@ def calc_allocations_results(data, funghi_allocations):
         # Look through each adventure
         for adventure_id, adventure_allocation in funghi_allocation.items():
             # If an empty funghi is in the allocation, the adventure fails
-            if not EMPTY_ID in adventure_allocation:
-                allocated_funghis = gen_allocated_funghis(
-                    data, adventure_allocation)
-                adventure = adventures[adventure_id]
-                requirements = adventure['requirements']
-                # Look through each requirement
-                all_requirements_met = True
-                for requirement in requirements.values():
-                    augmented_funghis = gen_augmented_funghis(
-                        requirement, allocated_funghis)
-                    requirement_met = is_non_reduce_requirement_met(
-                        data, requirement, augmented_funghis, 'stats') and \
-                        is_non_reduce_requirement_met(
-                        data, requirement, augmented_funghis, 'skills') and \
-                        is_reduce_requirement_met(
-                            data, requirement, augmented_funghis)
-                    if requirement_met:
-                        req_rewards = requirement['rewards']
-                        score += calc_weighted_score(rewards, req_rewards)
-                        success_count += 1
-                    else:
-                        all_requirements_met = False
-                    requirement_count += 1
-                # Add score of perfect reward if all requirements are met
-                if all_requirements_met:
-                    req_rewards = adventure['perfect_rewards']
+            if EMPTY_ID in adventure_allocation:
+                continue
+            allocated_funghis = gen_allocated_funghis(
+                data, adventure_allocation)
+            adventure = adventures[adventure_id]
+            requirements = adventure['requirements']
+            # Look through each requirement
+            all_requirements_met = True
+            for requirement in requirements.values():
+                augmented_funghis = gen_augmented_funghis(
+                    requirement, allocated_funghis)
+                requirement_met = is_non_reduce_requirement_met(
+                    data, requirement, augmented_funghis, 'stats') and \
+                    is_non_reduce_requirement_met(
+                    data, requirement, augmented_funghis, 'skills') and \
+                    is_reduce_requirement_met(
+                        data, requirement, augmented_funghis)
+                if requirement_met:
+                    req_rewards = requirement['rewards']
                     score += calc_weighted_score(rewards, req_rewards)
+                    success_count += 1
+                else:
+                    all_requirements_met = False
+                requirement_count += 1
+            # Add score of perfect reward if all requirements are met
+            if all_requirements_met:
+                req_rewards = adventure['perfect_rewards']
+                score += calc_weighted_score(rewards, req_rewards)
         results.append({
             'score': score,
             'success_count': success_count,
@@ -247,7 +249,7 @@ def is_non_reduce_requirement_met(data, requirement, augmented_funghis, spec):
 
 
 def is_reduce_requirement_met(data, requirement, augmented_funghis):
-    if not 'reduce_stats' in requirement:
+    if 'reduce_stats' not in requirement:
         return True
     req_reduce_stats = requirement['reduce_stats']
     # Check each reduce stats
@@ -266,41 +268,57 @@ def is_reduce_requirement_met(data, requirement, augmented_funghis):
 
 
 def gen_augmented_funghis(requirement, allocated_funghis):
-    # Generate permutations such that each boost is paired to a funghis
-    req_boosts = requirement['boosts']
-    can_augment = False
-    boost_permutations = itertools.permutations(
-        allocated_funghis, len(req_boosts))
-    # Try each permutation
-    for permutated_funghis in boost_permutations:
-        augmented_funghis = []
-        # Specify each boost to a funghi
-        for req_boost, funghi in zip(req_boosts, permutated_funghis):
-            augmented_funghi = copy.deepcopy(funghi)
+    augmented_funghis = gen_augmented_funghis_logic(
+        requirement, allocated_funghis, False)
+    return gen_augmented_funghis_logic(
+        requirement, augmented_funghis, True)
+
+
+def gen_augmented_funghis_logic(requirement, allocated_funghis, is_reduce):
+    augmented_funghis = []
+    if is_reduce:
+        if 'reduce_boosts' in requirement:
+            req_boosts = requirement['reduce_boosts']
+        else:
+            return allocated_funghis
+    else:
+        if 'boosts' in requirement:
+            req_boosts = requirement['boosts']
+        else:
+            return allocated_funghis
+    # Check each funghi to see if it can be augmented
+    for funghi in allocated_funghis:
+        final_augmented_funghi = copy.deepcopy(funghi)
+        # Check each boost
+        for req_boost in req_boosts:
+            augmented_funghi = None
             funghi_skills = funghi['skills']
             # The funghi has to pass all the skills
             for skill_name, boost_stats in req_boost.items():
                 if skill_name in funghi_skills and \
                         funghi_skills[skill_name] > 0:
+                    if augmented_funghi is None:
+                        augmented_funghi = copy.deepcopy(
+                            final_augmented_funghi)
                     augmented_funghi_stats = augmented_funghi['stats']
                     for boost_stat_name, boost_value in boost_stats.items():
                         augmented_funghi_stats[boost_stat_name] += boost_value
-                    can_augment = True
                 else:
-                    can_augment = False
-                    break
-            # If any augmentation fails, it should try the next permutation
-            if can_augment:
-                augmented_funghis.append(augmented_funghi)
-            else:
-                break
-        # If any augmentation succeeds, it should stop trying
-        if can_augment:
-            break
-    if can_augment:
-        return augmented_funghis
-    else:
-        return copy.deepcopy(allocated_funghis)
+                    # If the funghi fails any skill, the augmented funghi
+                    # should be discarded
+                    augmented_funghi = None
+                    # if it is in reduce mode, it should return the original
+                    # funghis, otherwise, we should try the next boost
+                    if is_reduce:
+                        return allocated_funghis
+                    else:
+                        break
+            # Check whether to save the final augmented funghi
+            if augmented_funghi is not None:
+                final_augmented_funghi = augmented_funghi
+        # Add the augmented funghi
+        augmented_funghis.append(final_augmented_funghi)
+    return augmented_funghis
 
 
 def calc_weighted_score(rewards, req_rewards):

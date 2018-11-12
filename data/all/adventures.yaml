@@ -409,11 +409,7 @@
       name: 推得動大岩石嗎？
       reduce_stats:
         vitality: 260
-      boosts:
-      - hard_head:
-          vitality: 15
-      - hard_head:
-          vitality: 15
+      reduce_boosts:
       - hard_head:
           vitality: 15
       rewards:
