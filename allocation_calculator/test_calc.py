@@ -69,59 +69,124 @@ STUB_DATA = {
 }
 
 
-class TestCalc(unittest.TestCase):
-    def test_gen_funghi_combinations_1(self):
+class TestGenFunghiCombinations(unittest.TestCase):
+    def test_simple_1(self):
         EXPECTED_COMBINATIONS = [
-            {1: (1,), 2: (2, 3)},
-            {1: (1,), 2: (2, 4)},
-            {1: (1,), 2: (3, 4)},
-            {1: (2,), 2: (1, 3)},
-            {1: (2,), 2: (1, 4)},
-            {1: (2,), 2: (3, 4)},
-            {1: (3,), 2: (1, 2)},
-            {1: (3,), 2: (1, 4)},
-            {1: (3,), 2: (2, 4)},
-            {1: (4,), 2: (1, 2)},
-            {1: (4,), 2: (1, 3)},
-            {1: (4,), 2: (2, 3)},
+            {1: [1], 2: [2, 3]},
+            {1: [1], 2: [2, 4]},
+            {1: [1], 2: [3, 4]},
+            {1: [2], 2: [1, 3]},
+            {1: [2], 2: [1, 4]},
+            {1: [2], 2: [3, 4]},
+            {1: [3], 2: [1, 2]},
+            {1: [3], 2: [1, 4]},
+            {1: [3], 2: [2, 4]},
+            {1: [4], 2: [1, 2]},
+            {1: [4], 2: [1, 3]},
+            {1: [4], 2: [2, 3]},
         ]
         combinations = calc.gen_funghi_combinations(STUB_DATA, 3, 4)
-        assert EXPECTED_COMBINATIONS == list(combinations)
+        assert list(combinations) == EXPECTED_COMBINATIONS
 
-    def test_gen_funghi_combinations_2(self):
+    def test_simple_2(self):
         EXPECTED_COMBINATIONS = [
-            {1: (1,), 2: (2, 3)},
-            {1: (2,), 2: (1, 3)},
-            {1: (3,), 2: (1, 2)},
+            {1: [1], 2: [2, 3]},
+            {1: [2], 2: [1, 3]},
+            {1: [3], 2: [1, 2]},
         ]
         data = copy.deepcopy(STUB_DATA)
         del data['funghis'][4]
         combinations = calc.gen_funghi_combinations(data, 3, 3)
-        assert EXPECTED_COMBINATIONS == list(combinations)
+        assert list(combinations) == EXPECTED_COMBINATIONS
 
-    def test_gen_funghi_combinations_3(self):
+    def test_simple_3(self):
         EXPECTED_COMBINATIONS = [
-            {1: (1,), 2: (-1, 2)},
-            {1: (2,), 2: (-1, 1)},
-            {1: (-1,), 2: (1, 2)},
+            {1: [1], 2: [-1, 2]},
+            {1: [2], 2: [-1, 1]},
+            {1: [-1], 2: [1, 2]},
         ]
         data = copy.deepcopy(STUB_DATA)
         del data['funghis'][3]
         del data['funghis'][4]
         combinations = calc.gen_funghi_combinations(data, 3, 2)
-        assert EXPECTED_COMBINATIONS == list(combinations)
+        assert list(combinations) == EXPECTED_COMBINATIONS
 
-    def test_gen_funghi_combinations_4(self):
+    def test_multi_secondary_1(self):
         EXPECTED_COMBINATIONS = [
-            {1: (1,), 2: (2, 2)},
-            {1: (2,), 2: (1, 2)},
+            {1: [1], 2: [2, 2]},
+            {1: [2], 2: [1, 2]},
         ]
         data = copy.deepcopy(STUB_DATA)
         del data['funghis'][3]
         del data['funghis'][4]
         data['funghis'][2]['capacity'] = 2
         combinations = calc.gen_funghi_combinations(data, 3, 3)
-        assert EXPECTED_COMBINATIONS == list(combinations)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+    def test_multi_secondary_2(self):
+        EXPECTED_COMBINATIONS = [
+            {1: [1], 2: [2, 2]},
+            {1: [1], 2: [2, 3]},
+            {1: [2], 2: [1, 2]},
+            {1: [2], 2: [1, 3]},
+            {1: [2], 2: [2, 3]},
+            {1: [3], 2: [1, 2]},
+            {1: [3], 2: [2, 2]},
+        ]
+        data = copy.deepcopy(STUB_DATA)
+        del data['funghis'][4]
+        data['funghis'][2]['capacity'] = 2
+        combinations = calc.gen_funghi_combinations(data, 3, 4)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+
+class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
+    def test_simple_1(self):
+        CANDIDATES = [(1, 1), (2, 1), (3, 1)]
+        EXPECTED_COMBINATIONS = [
+            [(1, 1)],
+            [(2, 1)],
+            [(3, 1)],
+        ]
+        combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 1)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+    def test_simple_2(self):
+        CANDIDATES = [(1, 1), (2, 1), (3, 1)]
+        EXPECTED_COMBINATIONS = [
+            [(1, 1), (2, 1)],
+            [(1, 1), (3, 1)],
+            [(2, 1), (3, 1)],
+        ]
+        combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 2)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+    def test_simple_3(self):
+        CANDIDATES = [(1, 1), (2, 1), (3, 1)]
+        EXPECTED_COMBINATIONS = [
+            [(1, 1), (2, 1), (3, 1)],
+        ]
+        combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 3)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+    def test_multi_secondary_1(self):
+        CANDIDATES = [(1, 1), (2, 1), (2, 2)]
+        EXPECTED_COMBINATIONS = [
+            [(1, 1), (2, 1)],
+            [(2, 1), (2, 2)],
+        ]
+        combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 2)
+        assert list(combinations) == EXPECTED_COMBINATIONS
+
+    def test_multi_secondary_2(self):
+        CANDIDATES = [(1, 1), (2, 1), (2, 2), (3, 1)]
+        EXPECTED_COMBINATIONS = [
+            [(1, 1), (2, 1), (2, 2)],
+            [(1, 1), (2, 1), (3, 1)],
+            [(2, 1), (2, 2), (3, 1)],
+        ]
+        combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 3)
+        assert list(combinations) == EXPECTED_COMBINATIONS
 
 
 if __name__ == '__main__':

@@ -52,10 +52,6 @@ def calc_total_funghi_capacity(data):
 def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
     """Generate funghi combinations.
 
-    For example, if the funghis are (1, 2, 3, 4) and the adventure capacities
-    are (1, 2), then the combinations will be [((1), (2, 3)), ((1), (2, 4)),
-    ((1), (3, 4)), ((2), (1, 3)), ((2), (1, 4)), ((2), (3, 4)), ...,
-    ((4), (1, 2)), ((4), (1, 3)), ((4), (2, 3))]
     Empty funghis will be generated if there are not enough funghis for
     allocations.
     """
@@ -63,14 +59,13 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
     # Generate funghi candidates
     funghis = data['funghis']
     for funghi_id, funghi in funghis.items():
-        fungi_repeated_ids = itertools.repeat(funghi_id, funghi['capacity'])
-        candidates.extend(list(fungi_repeated_ids))
+        for funghi_idx in range(funghi['capacity']):
+            candidates.append((funghi_id, funghi_idx))
     # If there are not enough funghis, generate negative IDs as empty funghis
-    # TODO: It would fail if there are multiple funghis
     if funghi_capacity < adventure_capacity:
         empty_size = adventure_capacity - funghi_capacity
-        for i in range(-1, -1 * (empty_size + 1), -1):
-            candidates.append(i)
+        for empty_idx in range(empty_size):
+            candidates.append((EMPTY_ID, empty_idx))
     # Generate combinations of funghis in each adventure, then proceed with the
     # remaining unused funghis
     adventures = data['adventures']
@@ -82,7 +77,7 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
     # Add the generator for the first adventure
     first_adventure = adventures_values[0]
     local_capacity = first_adventure['capacity']
-    local_comb = itertools.combinations(candidates, local_capacity)
+    local_comb = gen_combinations_primary_jumpy(candidates, local_capacity)
     generators.append(local_comb)
     # Add dummy candidates
     candidates_list.append([])
@@ -105,7 +100,8 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
                 output = {}
                 for adventure_id, candidates_item in \
                         zip(adventures_keys, candidates_list[1:]):
-                    output[adventure_id] = candidates_item
+                    output[adventure_id] = [pair[0]
+                                            for pair in candidates_item]
                 yield output
                 candidates_list.pop()
             else:
@@ -113,11 +109,53 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
                 next_adventure = adventures_values[next_idx]
                 local_capacity = next_adventure['capacity']
                 sorted_remaining_candidates = sorted(remaining_candidates)
-                local_comb = itertools.combinations(
+                local_comb = gen_combinations_primary_jumpy(
                     sorted_remaining_candidates, local_capacity)
                 generators.append(local_comb)
                 # Add next remaining candidates
                 remaining_list.append(remaining_candidates)
+
+
+def gen_combinations_primary_jumpy(candidates, n):
+    candidate_size = len(candidates)
+    # Create pointers
+    pointers = list(range(n))
+    # If the index is negative, the pointer can not move anymore, so that we can
+    # stop the generation
+    idx = 0
+    while idx >= 0:
+        # Output the combination
+        output = []
+        for idx in range(n):
+            pointer = pointers[idx]
+            output.append(candidates[pointer])
+        yield output
+        # Go to the next pointer combination
+        idx = n - 1
+        while idx >= 0:
+            # Find the new pointer with a different primary number
+            pointer = pointers[idx]
+            prev_primary_num = candidates[pointer][0]
+            can_move_pointer = False
+            for new_pointer in range(pointer + 1, candidate_size):
+                if candidates[new_pointer][0] != prev_primary_num:
+                    pointers[idx] = new_pointer
+                    can_move_pointer = True
+                    break
+            if can_move_pointer:
+                # Set the following pointers to be one position behind the
+                # previous one
+                for following_idx in range(idx + 1, n):
+                    pointers[following_idx] = pointers[following_idx - 1] + 1
+                # If the last pointer is invalid, try to move the previous
+                # pointer in the next loop
+                if pointers[-1] >= candidate_size:
+                    idx -= 1
+                else:
+                    break
+            else:
+                # Try to move the previous pointer in the next loop
+                idx -= 1
 
 
 def calc_allocations_results(data, funghi_combinations):
