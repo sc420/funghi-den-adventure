@@ -1,0 +1,94 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E3%81%B2%E3%82%93%E3%82%84%E3%82%8A%E6%B0%B7%E7%B5%90%E6%B4%9E
+
+15:
+  name: 清涼結冰洞(光滑通道) # ひんやり氷結洞(ツルツル通路)
+  capacity: 3
+  requirements:
+    1:
+      name: 清涼通道
+      stats:
+      - vitality: 100
+      rewards:
+        萬年冰: 2
+    2:
+      name: 寒冷通道
+      stats:
+      - vitality: 130
+      rewards:
+        鮮奶油菠蘿麵包: 2
+    3:
+      name: 冰冷的出風口
+      stats:
+      - intelligence: 100
+      rewards:
+        萬年冰: 1
+    4:
+      name: 狂風呼嘯的出風口
+      stats:
+      - intelligence: 100
+      - intelligence: 100
+      - intelligence: 100
+      boosts:
+      - agile:
+          intelligence: 30
+      rewards:
+        大號滿福堡: 2
+    5:
+      name: 薄冰之橋
+      stats:
+      - speed: 100
+      rewards:
+        鮮奶油菠蘿麵包: 1
+    6:
+      name: 掃落冰錐
+      stats:
+      - speed: 140
+      - speed: 140
+      boosts:
+      - horn:
+          speed: 10
+      rewards:
+        固定結晶(星盤狀): 1
+    7:
+      name: 掃落更多冰錐
+      stats:
+      - speed: 150
+      - speed: 150
+      boosts:
+      - horn:
+          speed: 30
+      rewards:
+        結冰天使: 1
+    8:
+      name: 滾雪球
+      stats:
+      - vitality: 150
+        speed: 130
+      boosts:
+      - insensitive:
+          speed: 40
+      rewards:
+        固定結晶(星盤狀): 1
+    9:
+      name: 絕不向寒冷低頭
+      reduce_stats:
+        speed: 420
+      boosts:
+      - food:
+          speed: 40
+      rewards:
+        結冰天使: 1
+    10:
+      name: 風之子
+      skills:
+      - agile: 1
+      rewards:
+        萬年冰: 2
+    11:
+      name: 寒冷算什麼
+      skills:
+      - cold_resist: 1
+      rewards:
+        萬年冰: 4
+  perfect_rewards:
+    固定結晶(星盤狀): 3
