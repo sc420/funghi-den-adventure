@@ -1,16 +1,5 @@
-# Specify adventures in this file
-#
-# All stats: ['vitality', 'intelligence', 'speed']
-# All skills: ['luck', 'insensitive', 'horn', 'agile', 'night_eyes', 'stealth',
-#              'cute', 'food', 'swimmer', 'big_eater', 'short_range_attack',
-#              'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
-#              'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
-#              'poison', 'courage', 'smart', 'iron_fist', 'sensor']
-#
-# Reference: http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
-
 1:
-  name: 鼴鼠之洞(入口)
+  name: 鼴鼠之洞(入口) # モグラの穴(いりぐち)
   capacity: 1
   requirements:
     1:
@@ -58,7 +47,7 @@
   perfect_rewards:
     mole_claw: 1
 3:
-  name: 岩石隧道(入口)
+  name: 岩石隧道(入口) # 岩石トンネル(いりぐち)
   capacity: 2
   requirements:
     1:

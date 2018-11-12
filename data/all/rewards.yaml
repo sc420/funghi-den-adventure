@@ -1,22 +1,35 @@
 # Specify the importance of rewards in this file
+#
+# References:
+#
+# Adventures (Japanese):
+# <IDs>(<Japanese name>): <URL>
+# 1,2(モグラの穴): https://namekonosuwiki.gamerch.com/%E3%83%A2%E3%82%B0%E3%83%A9%E3%81%AE%E7%A9%B4
+# 3,4(岩石トンネル): https://namekonosuwiki.gamerch.com/%E5%B2%A9%E7%9F%B3%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB
+# 5,6(ムチン地底湖): https://namekonosuwiki.gamerch.com/%E3%83%A0%E3%83%81%E3%83%B3%E5%9C%B0%E5%BA%95%E6%B9%96
+# 7,8(グツグツ間欠泉): https://namekonosuwiki.gamerch.com/%E3%82%B0%E3%83%84%E3%82%B0%E3%83%84%E9%96%93%E6%AC%A0%E6%B3%89
+# 9,10(ホタル茸の道): https://namekonosuwiki.gamerch.com/%E3%83%9B%E3%82%BF%E3%83%AB%E8%8C%B8%E3%81%AE%E9%81%93
+# 11,12(ねっこトンネル): https://namekonosuwiki.gamerch.com/%E3%81%AD%E3%81%A3%E3%81%93%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB
+# 13,14,15(ひんやり氷結洞): https://namekonosuwiki.gamerch.com/%E3%81%B2%E3%82%93%E3%82%84%E3%82%8A%E6%B0%B7%E7%B5%90%E6%B4%9E
+# 16,17,18(砂壁の空洞): https://namekonosuwiki.gamerch.com/%E7%A0%82%E5%A3%81%E3%81%AE%E7%A9%BA%E6%B4%9E
 
 ################################################################################
 # Items
 ################################################################################
-# 鼴鼠之洞
-hard_clay: 1.0
-# 岩石隧道
-hard_rock: 1.0
+# 1,2(鼴鼠之洞)
+hard_clay: 1.0 # カチコチ粘土
+# 3,4(岩石隧道)
+hard_rock: 1.0 # かたい岩
 
 ################################################################################
 # Treasures
 ################################################################################
-# 鼴鼠之洞
-twirly_root: 1.0
-mole_claw: 1.0
-root_ball: 1.0
-# 岩石隧道
-square_stone: 1.0
-reversible_stone: 1.0
-tea_stone: 1.0
-bridge_stone: 1.0
+# 1,2(鼴鼠之洞)
+twirly_root: 1.0 # くるくるねっこ
+mole_claw: 1.0 # モグラの爪
+root_ball: 1.0 # ねっこ玉
+# 3,4(岩石隧道)
+square_stone: 1.0 # きっちり ストーン
+reversible_stone: 1.0 # リバーシブル ストーン
+tea_stone: 1.0 # ティー ストーン
+bridge_stone: 1.0 # ブリッジ ストーン

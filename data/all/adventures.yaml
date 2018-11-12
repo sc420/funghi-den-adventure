@@ -1,16 +1,65 @@
-# Specify adventures in this file
+# Specify the adventures in this file
 #
-# All stats: ['vitality', 'intelligence', 'speed']
-# All skills: ['luck', 'insensitive', 'horn', 'agile', 'night_eyes', 'stealth',
-#              'cute', 'food', 'swimmer', 'big_eater', 'short_range_attack',
-#              'submerge', 'flight', 'luminescent', 'cold_resist', 'hard_head',
-#              'photosynthesis', 'weaponry', 'motivated', 'long_range_attack',
-#              'poison', 'courage', 'smart', 'iron_fist', 'sensor']
+# All stats (ステータス):
+# * vitality (しぶとさ)
+# * intelligence (かしこさ)
+# * speed (すばやさ)
 #
-# Reference: http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
+# All skills (スキル):
+# * swimmer (スイマー)
+# * submerge (潜水)
+# * hard_head (石頭)
+# * agile (俊足)
+# * cute (かわいい)
+# * luck (幸運)
+# * flight (飛行)
+# * night_eyes (夜目)
+# * luminescent (発光)
+# * short_range_attack (近距離攻撃)
+# * stealth (ステルス)
+# * insensitive (鈍感)
+# * horn (ツノ)
+# * big_eater (大食い)
+# * food (食べ物)
+# * cold_resist (耐寒)
+# * weaponry (武器持ち)
+# * photosynthesis (光合成)
+# * motivated (やる気)
+# * long_range_attack (遠距離攻撃)
+# * 小柄
+# * 鉄拳
+# * 力持ち
+# * ロボット
+# * poison (毒)
+# * sensor (センサー)
+# * バリア
+# * 音感
+# * 爆発
+# * 乗り物
+# * smart (かしこい)
+# * courage (勇気)
+#
+# References:
+#
+# Adventures (English):
+# http://funghigardening.wikia.com/wiki/Funghi%27s_Den/Adventures
+#
+# Adventures (Japanese):
+# <IDs>(<Japanese name>): <URL>
+# 1,2(モグラの穴): https://namekonosuwiki.gamerch.com/%E3%83%A2%E3%82%B0%E3%83%A9%E3%81%AE%E7%A9%B4
+# 3,4(岩石トンネル): https://namekonosuwiki.gamerch.com/%E5%B2%A9%E7%9F%B3%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB
+# 5,6(ムチン地底湖): https://namekonosuwiki.gamerch.com/%E3%83%A0%E3%83%81%E3%83%B3%E5%9C%B0%E5%BA%95%E6%B9%96
+# 7,8(グツグツ間欠泉): https://namekonosuwiki.gamerch.com/%E3%82%B0%E3%83%84%E3%82%B0%E3%83%84%E9%96%93%E6%AC%A0%E6%B3%89
+# 9,10(ホタル茸の道): https://namekonosuwiki.gamerch.com/%E3%83%9B%E3%82%BF%E3%83%AB%E8%8C%B8%E3%81%AE%E9%81%93
+# 11,12(ねっこトンネル): https://namekonosuwiki.gamerch.com/%E3%81%AD%E3%81%A3%E3%81%93%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB
+# 13,14,15(ひんやり氷結洞): https://namekonosuwiki.gamerch.com/%E3%81%B2%E3%82%93%E3%82%84%E3%82%8A%E6%B0%B7%E7%B5%90%E6%B4%9E
+# 16,17,18(砂壁の空洞): https://namekonosuwiki.gamerch.com/%E7%A0%82%E5%A3%81%E3%81%AE%E7%A9%BA%E6%B4%9E
+#
+# Skills (Japanese):
+# https://namekonosuwiki.gamerch.com/%E5%86%92%E9%99%BA%E5%85%88%E3%81%A8%E3%82%B9%E3%82%AD%E3%83%AB
 
 1:
-  name: 鼴鼠之洞(入口)
+  name: 鼴鼠之洞(入口) # モグラの穴(いりぐち)
   capacity: 1
   requirements:
     1:
@@ -58,7 +107,7 @@
   perfect_rewards:
     mole_claw: 1
 2:
-  name: 鼴鼠之洞(中途)
+  name: 鼴鼠之洞(中途) # モグラの穴(なかごろ)
   capacity: 3
   requirements:
     1:
@@ -165,7 +214,7 @@
   perfect_rewards:
     mole_tale: 2
 3:
-  name: 岩石隧道(入口)
+  name: 岩石隧道(入口) # 岩石トンネル(いりぐち)
   capacity: 2
   requirements:
     1:
@@ -262,7 +311,7 @@
   perfect_rewards:
     reversible_stone: 2
 4:
-  name: 岩石隧道(中途)
+  name: 岩石隧道(中途) # 岩石トンネル(なかごろ)
   capacity: 3
   requirements:
     1:
