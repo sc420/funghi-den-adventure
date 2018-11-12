@@ -86,7 +86,7 @@
       rewards:
         小小零件: 1
     12:
-      name: ???
+      name: 不要弄倒棒子......
       reduce_stats:
         intelligence: 360
       boosts:
@@ -95,7 +95,7 @@
       rewards:
         重重零件: 2
     13:
-      name: ???
+      name: 撐過沙塵暴
       skills:
       - courage: 1
       rewards:
