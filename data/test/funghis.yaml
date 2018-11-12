@@ -9,37 +9,33 @@
   name: 菇菇
   capacity: 1
   stats:
-    vitality: 110
-    intelligence: 110
-    speed: 110
+    vitality: 10
+    intelligence: 10
+    speed: 10
   skills:
     luck: 1
-    hard_head: 1
 3:
   name: 小白菇菇
   capacity: 1
   stats:
-    vitality: 160
-    intelligence: 100
-    speed: 100
+    vitality: 30
+    intelligence: 10
+    speed: 10
   skills:
     insensitive: 1
 4:
   name: 惡魔菇菇
   capacity: 1
   stats:
-    vitality: 75
-    intelligence: 80
-    speed: 120
+    vitality: 10
+    intelligence: 10
+    speed: 30
   skills:
     horn: 1
-    hard_head: 1
 5:
   name: 偽裝菇菇
   capacity: 1
   stats:
-    vitality: 95
-    intelligence: 125
-    speed: 95
-  skills:
-    swimmer: 1
+    vitality: 15
+    intelligence: 15
+    speed: 15

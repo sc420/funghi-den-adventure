@@ -9,12 +9,14 @@
   name: 菇菇
   capacity: 1
   stats:
-    vitality: 110
-    intelligence: 110
+    vitality: 115
+    intelligence: 115
     speed: 110
   skills:
     luck: 1
     hard_head: 1
+# 2:
+#   name: 枯哭菇菇
 3:
   name: 小白菇菇
   capacity: 1
@@ -53,6 +55,16 @@
   skills:
     agile: 1
     night_eyes: 1
+7:
+  name: 光頭菇菇
+  capacity: 1
+  stats:
+    vitality: 130
+    intelligence: 100
+    speed: 100
+  skills:
+    stealth: 1
+    luminescent: 1
 13:
   name: 黃色菇菇
   capacity: 1
