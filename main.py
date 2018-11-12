@@ -1,7 +1,9 @@
+# Native modules
 import argparse
 import os
 import yaml
 
+# Project modules
 import allocation_calculator.calc as calc
 
 
