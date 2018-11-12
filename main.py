@@ -38,10 +38,10 @@ def main():
     total_funghi_capacity = calc.calc_total_funghi_capacity(data)
     funghi_combinations = calc.gen_funghi_combinations(
         data, total_adventure_capacity, total_funghi_capacity)
-    funghi_allocations = calc.convert_combinations_to_allocations(
-        data, funghi_combinations)
-    results = calc.calc_allocations_results(data, funghi_allocations)
-    calc.list_best_allocations(data, funghi_allocations, results)
+    results = calc.calc_allocations_results(data, funghi_combinations)
+    funghi_combinations = calc.gen_funghi_combinations(
+        data, total_adventure_capacity, total_funghi_capacity)
+    calc.list_best_allocations(data, funghi_combinations, results)
 
 
 if __name__ == '__main__':

@@ -74,6 +74,7 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
     # Generate combinations of funghis in each adventure, then proceed with the
     # remaining unused funghis
     adventures = data['adventures']
+    adventures_keys = list(adventures)
     adventures_values = list(adventures.values())
     generators = []
     candidates_list = []
@@ -101,11 +102,10 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
                 set(local_candidates)
             if len(remaining_candidates) == 0 or \
                     next_idx >= len(adventures_values):
-                output = []
-                for candidates_item in candidates_list:
-                    output.extend(candidates_item)
-                # Convert negative IDs to empty IDs
-                output = [n if n >= 0 else EMPTY_ID for n in output]
+                output = {}
+                for adventure_id, candidates_item in \
+                        zip(adventures_keys, candidates_list[1:]):
+                    output[adventure_id] = candidates_item
                 yield output
                 candidates_list.pop()
             else:
@@ -120,32 +120,17 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
                 remaining_list.append(remaining_candidates)
 
 
-def convert_combinations_to_allocations(data, funghi_combinations):
-    allocations = []
-    adventures = data['adventures']
-    for combination in funghi_combinations:
-        allocation = {}
-        ofs_start = 0
-        for adventure_id, adventure in adventures.items():
-            capacity = adventure['capacity']
-            ofs_end = ofs_start + capacity
-            allocation[adventure_id] = combination[ofs_start:ofs_end]
-            ofs_start = ofs_end
-        allocations.append(allocation)
-    return allocations
-
-
-def calc_allocations_results(data, funghi_allocations):
+def calc_allocations_results(data, funghi_combinations):
     results = []
     adventures = data['adventures']
     rewards = data['rewards']
     # Calculate score for each allocation
-    for funghi_allocation in funghi_allocations:
+    for funghi_combination in funghi_combinations:
         score = 0.0
         success_count = 0
         requirement_count = 0
         # Look through each adventure
-        for adventure_id, adventure_allocation in funghi_allocation.items():
+        for adventure_id, adventure_allocation in funghi_combination.items():
             # If an empty funghi is in the allocation, the adventure fails
             if EMPTY_ID in adventure_allocation:
                 continue
@@ -303,7 +288,7 @@ def calc_weighted_score(rewards, req_rewards):
     return score
 
 
-def list_best_allocations(data, funghi_allocations, results):
+def list_best_allocations(data, funghi_combinations, results):
     scores = [result['score'] for result in results]
     max_score = max(scores)
     # Print the max score
@@ -311,7 +296,7 @@ def list_best_allocations(data, funghi_allocations, results):
     # List all allocations of the max score
     print('Best allocations:')
     idx = 0
-    for funghi_allocation, result in zip(funghi_allocations, results):
+    for funghi_combination, result in zip(funghi_combinations, results):
         score = result['score']
         success_count = result['success_count']
         requirement_count = result['requirement_count']
@@ -322,15 +307,15 @@ def list_best_allocations(data, funghi_allocations, results):
         if score >= max_score:
             print('#{}'.format(idx + 1))
             print('Success rate: {:.2f}%'.format(success_rate))
-            print_best_allocation(data, funghi_allocation)
+            print_best_allocation(data, funghi_combination)
             print()
             idx += 1
 
 
-def print_best_allocation(data, funghi_allocation):
+def print_best_allocation(data, funghi_combination):
     adventures = data['adventures']
     funghis = data['funghis']
-    for adventure_id, adventure_allocation in funghi_allocation.items():
+    for adventure_id, adventure_allocation in funghi_combination.items():
         adventure = adventures[adventure_id]
         funghi_names = []
         for funghi_id in adventure_allocation:
