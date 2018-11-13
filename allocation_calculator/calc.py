@@ -182,11 +182,10 @@ def calc_allocations_results(data, funghi_combinations):
                 augmented_funghis = gen_augmented_funghis(
                     requirement, allocated_funghis)
                 requirement_met = is_non_reduce_requirement_met(
-                    data, requirement, augmented_funghis, 'stats') and \
+                    requirement, augmented_funghis, 'stats') and \
                     is_non_reduce_requirement_met(
-                    data, requirement, augmented_funghis, 'skills') and \
-                    is_reduce_requirement_met(
-                        data, requirement, augmented_funghis)
+                    requirement, augmented_funghis, 'skills') and \
+                    is_reduce_requirement_met(requirement, augmented_funghis)
                 if requirement_met:
                     req_rewards = requirement['rewards']
                     score += calc_weighted_score(rewards, req_rewards)
@@ -217,7 +216,7 @@ def gen_allocated_funghis(data, adventure_allocation):
     return allocated_funghis
 
 
-def is_non_reduce_requirement_met(data, requirement, augmented_funghis, spec):
+def is_non_reduce_requirement_met(requirement, augmented_funghis, spec):
     # Generate permutations such that each spec is paired to a funghis
     req_specs = requirement[spec]
     is_met = True
@@ -245,7 +244,7 @@ def is_non_reduce_requirement_met(data, requirement, augmented_funghis, spec):
     return is_met
 
 
-def is_reduce_requirement_met(data, requirement, augmented_funghis):
+def is_reduce_requirement_met(requirement, augmented_funghis):
     if 'reduce_stats' not in requirement:
         return True
     req_reduce_stats = requirement['reduce_stats']
