@@ -525,9 +525,9 @@
   name: 紅土菇菇
   capacity: 1
   stats:
-    vitality: 120
-    intelligence: 120
-    speed: 75
+    vitality: 135
+    intelligence: 135
+    speed: 90
   skills:
     hard_head: 1
     insensitive: 1

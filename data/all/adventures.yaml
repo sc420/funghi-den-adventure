@@ -97,7 +97,7 @@
       stats:
       - vitality: 20
       rewards:
-        hard_clay: 1
+        hard_clay: 2
     7:
       name: 惡臭橫洞
       stats:
@@ -292,9 +292,7 @@
       name: 推得動大岩石嗎？
       reduce_stats:
         vitality: 60
-      boosts:
-      - hard_head:
-          vitality: 15
+      reduce_boosts:
       - hard_head:
           vitality: 15
       rewards:
@@ -427,5 +425,7 @@
       name: 空手有點強人所難
       skills:
       - weaponry: 1
+      rewards:
+        tea_stone: 1
   perfect_rewards:
     bridge_stone: 2
