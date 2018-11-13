@@ -4,9 +4,9 @@
   name: 菇菇
   capacity: 1
   stats:
-    vitality: 115
-    intelligence: 115
-    speed: 115
+    vitality: 120
+    intelligence: 120
+    speed: 120
   skills:
     luck: 1
     hard_head: 1
@@ -36,9 +36,9 @@
   name: 狗狗菇菇
   capacity: 1
   stats:
-    vitality: 170
-    intelligence: 105
-    speed: 105
+    vitality: 175
+    intelligence: 115
+    speed: 115
   skills:
     agile: 1
 25:

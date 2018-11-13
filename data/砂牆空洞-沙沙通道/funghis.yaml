@@ -4,9 +4,9 @@
   name: 菇菇
   capacity: 1
   stats:
-    vitality: 115
-    intelligence: 115
-    speed: 115
+    vitality: 120
+    intelligence: 120
+    speed: 120
   skills:
     luck: 1
     hard_head: 1
@@ -34,18 +34,18 @@
   name: 夾子菇菇
   capacity: 1
   stats:
-    vitality: 100
-    intelligence: 90
-    speed: 150
+    vitality: 110
+    intelligence: 95
+    speed: 160
   skills:
     short_range_attack: 1
 17:
   name: 小辣椒菇菇
   capacity: 1
   stats:
-    vitality: 100
-    intelligence: 120
-    speed: 175
+    vitality: 110
+    intelligence: 130
+    speed: 185
   skills:
     food: 1
     courage: 1
@@ -56,7 +56,7 @@
   stats:
     vitality: 100
     intelligence: 55
-    speed: 145
+    speed: 160
   skills:
     agile: 1
     night_eyes: 1
@@ -64,18 +64,18 @@
   name: 狗狗菇菇
   capacity: 1
   stats:
-    vitality: 170
-    intelligence: 105
-    speed: 105
+    vitality: 175
+    intelligence: 115
+    speed: 115
   skills:
     agile: 1
 23:
   name: 迷彩菇菇
   capacity: 1
   stats:
-    vitality: 70
-    intelligence: 105
-    speed: 140
+    vitality: 75
+    intelligence: 125
+    speed: 150
   skills:
     night_eyes: 1
     stealth: 1
@@ -83,9 +83,9 @@
   name: 法老菇菇
   capacity: 1
   stats:
-    vitality: 120
-    intelligence: 165
-    speed: 145
+    vitality: 125
+    intelligence: 170
+    speed: 150
   skills:
     hard_head: 1
     luck: 1
