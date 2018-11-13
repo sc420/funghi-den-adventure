@@ -1,0 +1,125 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E7%A0%82%E5%A3%81%E3%81%AE%E7%A9%BA%E6%B4%9E
+
+1:
+  name: 菇菇
+  capacity: 1
+  stats:
+    vitality: 115
+    intelligence: 115
+    speed: 115
+  skills:
+    luck: 1
+    hard_head: 1
+6:
+  name: 喵咪菇菇
+  capacity: 1
+  stats:
+    vitality: 95
+    intelligence: 95
+    speed: 170
+  skills:
+    agile: 1
+    night_eyes: 1
+13:
+  name: 黃色菇菇
+  capacity: 1
+  stats:
+    vitality: 185
+    intelligence: 95
+    speed: 110
+  skills:
+    luck: 1
+    big_eater: 1
+14:
+  name: 夾子菇菇
+  capacity: 1
+  stats:
+    vitality: 100
+    intelligence: 90
+    speed: 150
+  skills:
+    short_range_attack: 1
+17:
+  name: 小辣椒菇菇
+  capacity: 1
+  stats:
+    vitality: 100
+    intelligence: 120
+    speed: 175
+  skills:
+    food: 1
+    courage: 1
+    音感: 1
+19:
+  name: 野貓菇菇
+  capacity: 1
+  stats:
+    vitality: 100
+    intelligence: 55
+    speed: 145
+  skills:
+    agile: 1
+    night_eyes: 1
+20:
+  name: 狗狗菇菇
+  capacity: 1
+  stats:
+    vitality: 170
+    intelligence: 105
+    speed: 105
+  skills:
+    agile: 1
+23:
+  name: 迷彩菇菇
+  capacity: 1
+  stats:
+    vitality: 70
+    intelligence: 105
+    speed: 140
+  skills:
+    night_eyes: 1
+    stealth: 1
+47:
+  name: 法老菇菇
+  capacity: 1
+  stats:
+    vitality: 120
+    intelligence: 165
+    speed: 145
+  skills:
+    hard_head: 1
+    luck: 1
+    smart: 1
+52:
+  name: 紅土菇菇
+  capacity: 1
+  stats:
+    vitality: 120
+    intelligence: 120
+    speed: 75
+  skills:
+    hard_head: 1
+    insensitive: 1
+    photosynthesis: 1
+    stealth: 1
+53:
+  name: 滑馬次郎
+  capacity: 1
+  stats:
+    vitality: 135
+    intelligence: 90
+    speed: 90
+  skills:
+    hard_head: 1
+    バリア: 1
+    night_eyes: 1
+54:
+  name: 頭巾菇菇
+  capacity: 1
+  stats:
+    vitality: 95
+    intelligence: 140
+    speed: 95
+  skills:
+    luck: 1
+    courage: 1
