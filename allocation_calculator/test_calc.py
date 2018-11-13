@@ -86,7 +86,7 @@ class TestGenFunghiCombinations(unittest.TestCase):
             {1: [4], 2: [2, 3]},
         ]
         combinations = calc.gen_funghi_combinations(STUB_DATA, 3, 4)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_simple_2(self):
         EXPECTED_COMBINATIONS = [
@@ -97,7 +97,7 @@ class TestGenFunghiCombinations(unittest.TestCase):
         data = copy.deepcopy(STUB_DATA)
         del data['funghis'][4]
         combinations = calc.gen_funghi_combinations(data, 3, 3)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_simple_3(self):
         EXPECTED_COMBINATIONS = [
@@ -109,7 +109,7 @@ class TestGenFunghiCombinations(unittest.TestCase):
         del data['funghis'][3]
         del data['funghis'][4]
         combinations = calc.gen_funghi_combinations(data, 3, 2)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_multi_secondary_1(self):
         EXPECTED_COMBINATIONS = [
@@ -121,7 +121,7 @@ class TestGenFunghiCombinations(unittest.TestCase):
         del data['funghis'][4]
         data['funghis'][2]['capacity'] = 2
         combinations = calc.gen_funghi_combinations(data, 3, 3)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_multi_secondary_2(self):
         EXPECTED_COMBINATIONS = [
@@ -137,7 +137,7 @@ class TestGenFunghiCombinations(unittest.TestCase):
         del data['funghis'][4]
         data['funghis'][2]['capacity'] = 2
         combinations = calc.gen_funghi_combinations(data, 3, 4)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
 
 class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
@@ -149,7 +149,7 @@ class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
             [(3, 1)],
         ]
         combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 1)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_simple_2(self):
         CANDIDATES = [(1, 1), (2, 1), (3, 1)]
@@ -159,7 +159,7 @@ class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
             [(2, 1), (3, 1)],
         ]
         combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 2)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_simple_3(self):
         CANDIDATES = [(1, 1), (2, 1), (3, 1)]
@@ -167,7 +167,7 @@ class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
             [(1, 1), (2, 1), (3, 1)],
         ]
         combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 3)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_multi_secondary_1(self):
         CANDIDATES = [(1, 1), (2, 1), (2, 2)]
@@ -176,7 +176,7 @@ class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
             [(2, 1), (2, 2)],
         ]
         combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 2)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
     def test_multi_secondary_2(self):
         CANDIDATES = [(1, 1), (2, 1), (2, 2), (3, 1)]
@@ -186,7 +186,7 @@ class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
             [(2, 1), (2, 2), (3, 1)],
         ]
         combinations = calc.gen_combinations_primary_jumpy(CANDIDATES, 3)
-        assert list(combinations) == EXPECTED_COMBINATIONS
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
 
 if __name__ == '__main__':
