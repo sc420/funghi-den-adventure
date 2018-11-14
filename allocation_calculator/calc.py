@@ -341,12 +341,12 @@ def calc_weighted_score(rewards, req_rewards):
     return score
 
 
-def list_best_allocations(data, funghi_combinations, results):
+def filter_best_results(funghi_combinations, results):
     # Calculate the max score
     scores = [result['score'] for result in results]
     max_score = max(scores)
     # Keep the combinations with the same max score
-    best_combinations = []
+    rate_and_combinations = []
     for combination, result in zip(funghi_combinations, results):
         score = result['score']
         if score >= max_score:
@@ -356,15 +356,24 @@ def list_best_allocations(data, funghi_combinations, results):
                 success_rate = success_count / requirement_count * 100.0
             else:
                 success_rate = 0.0
-            best_combinations.append((success_rate, combination))
+            rate_and_combinations.append((success_rate, combination))
     # Sort the combinations by score
-    best_combinations = sorted(
-        best_combinations, key=lambda t: t[0], reverse=True)
+    rate_and_combinations = sorted(
+        rate_and_combinations, key=lambda t: t[0], reverse=True)
+    return {
+        'max_score': max_score,
+        'rate_and_combinations': rate_and_combinations,
+    }
+
+
+def list_best_allocations(data, best_results):
+    max_score = best_results['max_score']
+    rate_and_combinations = best_results['rate_and_combinations']
     # Print the max score
     print('Max score: {}'.format(max_score))
     # List all allocations of the max score
     print('Best allocations:')
-    for idx, (success_rate, combination) in enumerate(best_combinations):
+    for idx, (success_rate, combination) in enumerate(rate_and_combinations):
         print('#{}'.format(idx + 1))
         print('Success rate: {:.2f}%'.format(success_rate))
         print_best_allocation(data, combination)

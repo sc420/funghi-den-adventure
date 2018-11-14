@@ -1,0 +1,225 @@
+15:
+  name: 清涼結冰洞(光滑通道) # ひんやり氷結洞(ツルツル通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 3
+  - 8
+  - 20
+  - 25
+  - 28
+  - 37
+  - 41
+  - 46
+  - 48
+  - 49
+  - 50
+  requirements:
+    1:
+      name: 清涼通道
+      stats:
+      - vitality: 100
+      rewards:
+        萬年冰: 2
+    2:
+      name: 寒冷通道
+      stats:
+      - vitality: 130
+      rewards:
+        鮮奶油菠蘿麵包: 2
+    3:
+      name: 冰冷的出風口
+      stats:
+      - intelligence: 100
+      rewards:
+        萬年冰: 1
+    4:
+      name: 狂風呼嘯的出風口
+      stats:
+      - intelligence: 100
+      - intelligence: 100
+      - intelligence: 100
+      boosts:
+      - agile:
+          intelligence: 30
+      rewards:
+        大號滿福堡: 2
+    5:
+      name: 薄冰之橋
+      stats:
+      - speed: 100
+      rewards:
+        鮮奶油菠蘿麵包: 1
+    6:
+      name: 掃落冰錐
+      stats:
+      - speed: 140
+      - speed: 140
+      boosts:
+      - horn:
+          speed: 10
+      rewards:
+        固定結晶(星盤狀): 1
+    7:
+      name: 掃落更多冰錐
+      stats:
+      - speed: 150
+      - speed: 150
+      boosts:
+      - horn:
+          speed: 30
+      rewards:
+        結冰天使: 1
+    8:
+      name: 滾雪球
+      stats:
+      - vitality: 150
+        speed: 130
+      boosts:
+      - insensitive:
+          speed: 40
+      rewards:
+        固定結晶(星盤狀): 1
+    9:
+      name: 絕不向寒冷低頭
+      reduce_stats:
+        speed: 420
+      boosts:
+      - food:
+          speed: 40
+      rewards:
+        結冰天使: 1
+    10:
+      name: 風之子
+      skills:
+      - agile: 1
+      rewards:
+        萬年冰: 2
+    11:
+      name: 寒冷算什麼
+      skills:
+      - cold_resist: 1
+      rewards:
+        萬年冰: 4
+  perfect_rewards:
+    固定結晶(星盤狀): 3
+18:
+  name: 砂牆空洞(厚重通道) # 砂壁の空洞(どっさり通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 6
+  - 13
+  - 14
+  - 17
+  - 19
+  - 20
+  - 23
+  - 47
+  - 52
+  - 53
+  - 54
+  requirements:
+    1:
+      name: ???
+      stats:
+      - vitality: 100
+      rewards:
+        彎彎零件: 1
+    2:
+      name: ???
+      stats:
+      - vitality: 120
+      boosts:
+      - insensitive:
+          vitality: 20
+      rewards:
+        光輝之砂: 1
+    3:
+      name: 直至腰身沙之道路
+      stats:
+      - vitality: 155
+      boosts:
+      - insensitive:
+          vitality: 30
+      rewards:
+        小顆零件: 2
+    4:
+      name: ???
+      stats:
+      - intelligence: 90
+      rewards:
+        彎彎零件: 1
+    5:
+      name: 快塌的道路
+      stats:
+      - intelligence: 110
+      boosts:
+      - hard_head:
+          intelligence: 20
+      rewards:
+        重重零件: 1
+    6:
+      name: 開始崩塌的道路
+      stats:
+      - intelligence: 150
+      boosts:
+      - hard_head:
+          intelligence: 30
+      rewards:
+        光輝之砂: 1
+    7:
+      name: 在沙上奔馳
+      stats:
+      - speed: 110
+      rewards:
+        重重零件: 1
+    8:
+      name: 踏破流沙吧
+      stats:
+      - speed: 150
+      rewards:
+        光輝之砂: 1
+    9:
+      name: ???
+      stats:
+      - speed: 165
+      rewards:
+        小顆零件: 1
+    10:
+      name: 飛毛腿送貨
+      stats:
+      - speed: 160
+      - speed: 160
+      boosts:
+      - hard_head:
+          speed: 10
+      rewards:
+        光輝之砂: 2
+    11:
+      name: 看穿流沙吧
+      stats:
+      - intelligence: 130
+        speed: 150
+      boosts:
+      - hard_head:
+          intelligence: 30
+      rewards:
+        小顆零件: 2
+    12:
+      name: ???
+      reduce_stats:
+        speed: 450
+      boosts:
+      - hard_head:
+          speed: 30
+      rewards:
+        光輝之砂: 2
+    13:
+      name: 無光沙穴
+      skills:
+      - night_eyes: 1
+      rewards:
+        小顆零件: 1
+  perfect_rewards:
+    光輝之砂: 3
