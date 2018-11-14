@@ -17,7 +17,7 @@ ORDERED_DATA_DIRS = [
 # Read only one funghis spec
 FUNGHI_PATH = 'data/all/funghis.yaml'
 # Limit the number of global allocations (set to 0 to ignore)
-GLOBAL_ALLOCATIONS_LIMIT = 0
+GLOBAL_ALLOCATIONS_LIMIT = 1
 
 
 def gen_all_best_results():
