@@ -33,6 +33,72 @@ def normalize_funghis(funghis):
                 funghi[spec_name] = []
 
 
+def filter_out_subset_funghis(data):
+    adventures = data['adventures']
+    funghis = data['funghis']
+    adventure_capacity = calc_total_adventure_capacity(data)
+    funghi_capacity = calc_total_funghi_capacity(data)
+    remove = True
+    # We need to have enough funghis for all adventures
+    while remove and funghi_capacity > adventure_capacity:
+        remove = False
+        # Try each base funghi
+        for funghi_id in funghis:
+            signature = gen_adventure_requirement_met_signature(
+                data, funghi_id, adventures)
+            # For each other funghi, check whether the passing requirement list
+            # is a superset of the base funghi
+            for other_funghi_id in funghis:
+                if other_funghi_id == funghi_id:
+                    continue
+                other_signature = gen_adventure_requirement_met_signature(
+                    data, other_funghi_id, adventures)
+                if check_super_signature(signature, other_signature) and \
+                        check_super_stats(funghis, funghi_id, other_funghi_id):
+                    remove = True
+                    break
+            if remove:
+                del funghis[funghi_id]
+                funghi_capacity -= 1
+                break
+
+
+def gen_adventure_requirement_met_signature(data, funghi_id, adventures):
+    signature = {}
+    adventure_allocation = [funghi_id]
+    for adventure_id, adventure in adventures.items():
+        met_list = []
+        allocated_funghis = gen_allocated_funghis(
+            data, adventure_allocation)
+        requirements = adventure['requirements']
+        # Look through each requirement
+        for requirement in requirements.values():
+            augmented_funghis = gen_augmented_funghis(
+                requirement, allocated_funghis)
+            is_met = is_requirement_met(requirement, augmented_funghis)
+            met_list.append(is_met)
+        signature[adventure_id] = met_list
+    return signature
+
+
+def check_super_stats(funghis, funghi_id, super_funghi_id):
+    stats = funghis[funghi_id]['stats']
+    super_stats = funghis[super_funghi_id]['stats']
+    for stat_name, stat_value in stats.items():
+        if stat_name in super_stats:
+            if stat_value > super_stats[stat_name]:
+                return False
+    return True
+
+
+def check_super_signature(sig, super_sig):
+    for met_list, super_met_list in zip(sig.values(), super_sig.values()):
+        for met, super_met in zip(met_list, super_met_list):
+            if met and not super_met:
+                return False
+    return True
+
+
 def calc_total_adventure_capacity(data):
     count = 0
     adventures = data['adventures']

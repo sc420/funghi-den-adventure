@@ -77,9 +77,9 @@ def gen_all_best_results():
 def gen_single_best_results(data_dir_idx, allocated_counts):
     data_dir = ORDERED_DATA_DIRS[data_dir_idx]
     data = load_data(data_dir)
-    calc.normalize_data(data)
     filter_out_allocated_funghis(data, allocated_counts)
-    filter_out_subset_funghis(data)
+    calc.normalize_data(data)
+    calc.filter_out_subset_funghis(data)
     total_adventure_capacity = calc.calc_total_adventure_capacity(data)
     total_funghi_capacity = calc.calc_total_funghi_capacity(data)
     funghi_combinations = calc.gen_funghi_combinations(
@@ -113,69 +113,6 @@ def filter_out_allocated_funghis(data, allocated_counts):
         funghis[funghi_id]['capacity'] -= count
         if funghis[funghi_id]['capacity'] <= 0:
             del funghis[funghi_id]
-
-
-def filter_out_subset_funghis(data):
-    adventures = data['adventures']
-    funghis = data['funghis']
-    adventure_capacity = calc.calc_total_adventure_capacity(data)
-    funghi_capacity = calc.calc_total_funghi_capacity(data)
-    remove = True
-    # We need to have enough funghis for all adventures
-    while remove and funghi_capacity > adventure_capacity:
-        remove = False
-        for funghi_id in funghis:
-            signature = gen_adventure_requirement_met_signature(
-                data, funghi_id, adventures)
-            for other_funghi_id in funghis:
-                if other_funghi_id == funghi_id:
-                    continue
-                other_signature = gen_adventure_requirement_met_signature(
-                    data, other_funghi_id, adventures)
-                if check_super_signature(signature, other_signature) and \
-                        check_super_stats(funghis, funghi_id, other_funghi_id):
-                    remove = True
-                    break
-            if remove:
-                del funghis[funghi_id]
-                funghi_capacity -= 1
-                break
-
-
-def gen_adventure_requirement_met_signature(data, funghi_id, adventures):
-    signature = {}
-    adventure_allocation = [funghi_id]
-    for adventure_id, adventure in adventures.items():
-        met_list = []
-        allocated_funghis = calc.gen_allocated_funghis(
-            data, adventure_allocation)
-        requirements = adventure['requirements']
-        # Look through each requirement
-        for requirement in requirements.values():
-            augmented_funghis = calc.gen_augmented_funghis(
-                requirement, allocated_funghis)
-            is_met = calc.is_requirement_met(requirement, augmented_funghis)
-            met_list.append(is_met)
-        signature[adventure_id] = met_list
-    return signature
-
-
-def check_super_stats(funghis, funghi_id, super_funghi_id):
-    stats = funghis[funghi_id]['stats']
-    super_stats = funghis[super_funghi_id]['stats']
-    for stat_name, stat_value in stats.items():
-        if stat_name in super_stats:
-            if stat_value > super_stats[stat_name]:
-                return False
-    return True
-
-
-def check_super_signature(sig, super_sig):
-    for met_list, super_met_list in zip(sig.values(), super_sig.values()):
-        for met, super_met in zip(met_list, super_met_list):
-            if met and not super_met:
-                return False
-    return True
 
 
 def remove_combination_from_allocated_counts(combination, allocated_counts):
