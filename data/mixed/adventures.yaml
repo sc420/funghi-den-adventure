@@ -121,13 +121,13 @@
   - 54
   requirements:
     1:
-      name: ???
+      name: 沙之道路
       stats:
       - vitality: 100
       rewards:
         彎彎零件: 1
     2:
-      name: ???
+      name: 深沙之道路
       stats:
       - vitality: 120
       boosts:
@@ -145,7 +145,7 @@
       rewards:
         小顆零件: 2
     4:
-      name: ???
+      name: 易塌的道路
       stats:
       - intelligence: 90
       rewards:
@@ -181,7 +181,7 @@
       rewards:
         光輝之砂: 1
     9:
-      name: ???
+      name: 不要下沉衝過去吧
       stats:
       - speed: 165
       rewards:
@@ -207,7 +207,7 @@
       rewards:
         小顆零件: 2
     12:
-      name: ???
+      name: 快快渡沙河
       reduce_stats:
         speed: 450
       boosts:
