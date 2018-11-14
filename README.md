@@ -11,5 +11,10 @@ See comments in `data/all/*.yaml`.
 ## Examples
 
 ```shell
+python main.py --data_dir=data/13-清涼結冰洞-筆直通道
+python main.py --data_dir=data/14-清涼結冰洞-凹凸通道
 python main.py --data_dir=data/15-清涼結冰洞-光滑通道
+python main.py --data_dir=data/16-砂牆空洞-沙沙通道
+python main.py --data_dir=data/17-砂牆空洞-隆起通道
+python main.py --data_dir=data/18-砂牆空洞-厚重通道
 ```

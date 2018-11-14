@@ -1,0 +1,100 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E3%81%B2%E3%82%93%E3%82%84%E3%82%8A%E6%B0%B7%E7%B5%90%E6%B4%9E
+
+15:
+  name: 清涼結冰洞(筆直通道) # ひんやり氷結洞(まっすぐ通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 3
+  - 8
+  - 20
+  - 25
+  - 28
+  - 37
+  - 41
+  - 46
+  - 48
+  - 49
+  - 50
+  requirements:
+    1:
+      name: 寒冷通道
+      stats:
+      - vitality: 130
+      rewards:
+        萬年冰: 2
+    2:
+      name: 寒意刺骨通道
+      stats:
+      - vitality: 150
+      boosts:
+      - cold_resist:
+          vitality: 30
+      rewards:
+        固定結晶(稜柱): 1
+    3:
+      name: 又冷又長的通道
+      stats:
+      - vitality: 160
+      rewards:
+        結冰天使: 1
+    4:
+      name: 冰冷的出風口
+      stats:
+      - intelligence: 100
+      rewards:
+        萬年冰: 1
+    5:
+      name: 狂風呼嘯的出風口
+      stats:
+      - intelligence: 120
+      rewards:
+        薄切肉片: 4
+    6:
+      name: 搖搖晃晃冰柱橋
+      stats:
+      - speed: 100
+      rewards:
+        萬年冰: 1
+    7:
+      name: 薄冰之橋
+      stats:
+      - speed: 90
+      - speed: 90
+      - speed: 90
+      rewards:
+        御好燒: 2
+    8:
+      name: 滾雪球
+      stats:
+      - vitality: 120
+        speed: 130
+      boosts:
+      - cold_resist:
+          vitality: 40
+      rewards:
+        固定結晶(稜柱): 1
+    9:
+      name: 大家一起取暖
+      reduce_stats:
+        vitality: 380
+      boosts:
+      - luck:
+          vitality: 10
+      rewards:
+        結冰天使: 1
+    10:
+      name: 陽光灑落的小房間
+      skills:
+      - photosynthesis: 1
+      rewards:
+        萬年冰: 1
+    11:
+      name: ???
+      stats:
+      - vitality: 120
+      - vitality: 120
+      rewards:
+        萬年冰: 4
+  perfect_rewards:
+    固定結晶(稜柱): 3

@@ -1,0 +1,101 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E3%81%B2%E3%82%93%E3%82%84%E3%82%8A%E6%B0%B7%E7%B5%90%E6%B4%9E
+
+15:
+  name: 清涼結冰洞(凹凸通道) # ひんやり氷結洞(こんもり通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 3
+  - 8
+  - 20
+  - 25
+  - 28
+  - 37
+  - 41
+  - 46
+  - 48
+  - 49
+  - 50
+  requirements:
+    1:
+      name: 清涼通道
+      stats:
+      - vitality: 100
+      rewards:
+        萬年冰: 2
+    2:
+      name: 寒冷通道
+      stats:
+      - vitality: 120
+      rewards:
+        酸甜漿果果汁: 2
+    3:
+      name: 冷凍水窪
+      stats:
+      - intelligence: 100
+      rewards:
+        酸甜漿果果汁: 1
+    4:
+      name: 冷凍水池
+      stats:
+      - intelligence: 140
+      rewards:
+        固定結晶(樹枝星狀): 1
+    5:
+      name: 冷冰冰的岔路
+      stats:
+      - intelligence: 150
+      - intelligence: 150
+      boosts:
+      - cold_resist:
+          intelligence: 30
+      rewards:
+        結冰天使: 1
+    6:
+      name: 搖搖晃晃冰柱橋
+      stats:
+      - speed: 100
+      rewards:
+        萬年冰: 1
+    7:
+      name: 薄冰之橋
+      stats:
+      - speed: 100
+      - speed: 100
+      - speed: 100
+      rewards:
+        綿密奶泡咖啡: 2
+    8:
+      name: 用雪造路
+      stats:
+      - intelligence: 100
+        speed: 160
+      boosts:
+      - cold_resist:
+          speed: 40
+      rewards:
+        固定結晶(樹枝星狀): 1
+    9:
+      name: 大家一起商量
+      reduce_stats:
+        intelligence: 420
+      boosts:
+      - luck:
+          intelligence: 30
+      rewards:
+        結冰天使: 1
+    10:
+      name: 確認溫度
+      skills:
+      - sensor: 1
+      rewards:
+        萬年冰: 2
+    11:
+      name: ???
+      stats:
+      - intelligence: 110
+      - intelligence: 110
+      rewards:
+        萬年冰: 4
+  perfect_rewards:
+    固定結晶(樹枝星狀): 3
