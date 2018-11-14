@@ -5,15 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "main.py (data/test)",
+            "name": "calc_single.py (data/test)",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/main.py",
+            "program": "${workspaceFolder}/calc_single.py",
             "console": "integratedTerminal",
             "args": [
                 "--data_dir",
                 "data/test"
             ]
+        },
+        {
+            "name": "calc_all.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/calc_all.py",
+            "console": "integratedTerminal"
         },
         {
             "name": "test_calc.py",

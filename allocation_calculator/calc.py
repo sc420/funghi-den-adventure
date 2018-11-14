@@ -197,12 +197,7 @@ def calc_allocations_results(data, funghi_combinations):
             for requirement in requirements.values():
                 augmented_funghis = gen_augmented_funghis(
                     requirement, allocated_funghis)
-                requirement_met = is_non_reduce_requirement_met(
-                    requirement, augmented_funghis, 'stats') and \
-                    is_non_reduce_requirement_met(
-                    requirement, augmented_funghis, 'skills') and \
-                    is_reduce_requirement_met(requirement, augmented_funghis)
-                if requirement_met:
+                if is_requirement_met(requirement, augmented_funghis):
                     req_rewards = requirement['rewards']
                     score += calc_weighted_score(rewards, req_rewards)
                     success_count += 1
@@ -230,53 +225,6 @@ def gen_allocated_funghis(data, adventure_allocation):
         else:
             allocated_funghis.append(funghis[funghi_id])
     return allocated_funghis
-
-
-def is_non_reduce_requirement_met(requirement, augmented_funghis, spec):
-    # Generate permutations such that each spec is paired to a funghis
-    req_specs = requirement[spec]
-    is_met = True
-    specs_permutations = itertools.permutations(
-        augmented_funghis, len(req_specs))
-    # Try each permutation
-    for permutated_funghis in specs_permutations:
-        # Specify each spec object to a funghi
-        for req_spec_obj, funghi in zip(req_specs, permutated_funghis):
-            funghi_specs = funghi[spec]
-            # The funghi has to pass all the specs
-            for spec_name, spec_value in req_spec_obj.items():
-                if spec_name in funghi_specs and \
-                        funghi_specs[spec_name] >= spec_value:
-                    is_met = True
-                else:
-                    is_met = False
-                    break
-                # If any check fails, it should try the next permutation
-            if not is_met:
-                break
-        # If any check succeeds, it should stop trying
-        if is_met:
-            break
-    return is_met
-
-
-def is_reduce_requirement_met(requirement, augmented_funghis):
-    if 'reduce_stats' not in requirement:
-        return True
-    req_reduce_stats = requirement['reduce_stats']
-    # Check each reduce stats
-    for stat_name, reduce_target in req_reduce_stats.items():
-        reduced_sum = 0
-        # Calculate the reduced value from all funghis
-        for funghi in augmented_funghis:
-            funghi_stats = funghi['stats']
-            if stat_name in funghi_stats:
-                reduced_sum += funghi_stats[stat_name]
-        # Check whether the reduced sum passes the requirement
-        if reduced_sum < reduce_target:
-            return False
-    # All funghis have passed the reduce targets, the requirement is met
-    return True
 
 
 def gen_augmented_funghis(requirement, allocated_funghis):
@@ -331,6 +279,61 @@ def gen_augmented_funghis_logic(requirement, allocated_funghis, is_reduce):
         # Add the augmented funghi
         augmented_funghis.append(final_augmented_funghi)
     return augmented_funghis
+
+
+def is_requirement_met(requirement, augmented_funghis):
+    return is_non_reduce_requirement_met(
+        requirement, augmented_funghis, 'stats') and \
+        is_non_reduce_requirement_met(
+        requirement, augmented_funghis, 'skills') and \
+        is_reduce_requirement_met(requirement, augmented_funghis)
+
+
+def is_non_reduce_requirement_met(requirement, augmented_funghis, spec):
+    # Generate permutations such that each spec is paired to a funghis
+    req_specs = requirement[spec]
+    is_met = True
+    specs_permutations = itertools.permutations(
+        augmented_funghis, len(req_specs))
+    # Try each permutation
+    for permutated_funghis in specs_permutations:
+        # Specify each spec object to a funghi
+        for req_spec_obj, funghi in zip(req_specs, permutated_funghis):
+            funghi_specs = funghi[spec]
+            # The funghi has to pass all the specs
+            for spec_name, spec_value in req_spec_obj.items():
+                if spec_name in funghi_specs and \
+                        funghi_specs[spec_name] >= spec_value:
+                    is_met = True
+                else:
+                    is_met = False
+                    break
+                # If any check fails, it should try the next permutation
+            if not is_met:
+                break
+        # If any check succeeds, it should stop trying
+        if is_met:
+            break
+    return is_met
+
+
+def is_reduce_requirement_met(requirement, augmented_funghis):
+    if 'reduce_stats' not in requirement:
+        return True
+    req_reduce_stats = requirement['reduce_stats']
+    # Check each reduce stats
+    for stat_name, reduce_target in req_reduce_stats.items():
+        reduced_sum = 0
+        # Calculate the reduced value from all funghis
+        for funghi in augmented_funghis:
+            funghi_stats = funghi['stats']
+            if stat_name in funghi_stats:
+                reduced_sum += funghi_stats[stat_name]
+        # Check whether the reduced sum passes the requirement
+        if reduced_sum < reduce_target:
+            return False
+    # All funghis have passed the reduce targets, the requirement is met
+    return True
 
 
 def calc_weighted_score(rewards, req_rewards):
