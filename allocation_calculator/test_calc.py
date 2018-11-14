@@ -304,6 +304,16 @@ class TestGenFunghiCombinations(unittest.TestCase):
         combinations = calc.gen_funghi_combinations(data, 3, 4)
         self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
 
+    def test_allowed_funghis_1(self):
+        EXPECTED_COMBINATIONS = [
+            {1: [1], 2: [2, 4]},
+            {1: [3], 2: [2, 4]},
+        ]
+        data = copy.deepcopy(self.STUB_DATA)
+        data['adventures'][2]['allowed_funghis'] = [2, 4]
+        combinations = calc.gen_funghi_combinations(data, 3, 4)
+        self.assertEqual(list(combinations), EXPECTED_COMBINATIONS)
+
 
 class TestGenCombinationsPrimaryJumpy(unittest.TestCase):
     def test_simple_1(self):

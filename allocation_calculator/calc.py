@@ -86,7 +86,11 @@ def gen_funghi_combinations(data, adventure_capacity, funghi_capacity):
     # Generate combinations
     while len(generators) > 0:
         next_idx = len(generators)
+        adventure = adventures_values[next_idx - 1]
         local_candidates = next(generators[-1], None)
+        # Check whether the local candidates are in the allowed list
+        while not check_allowed_funghis(adventure, local_candidates):
+            local_candidates = next(generators[-1], None)
         if local_candidates is None:
             generators.pop()
             candidates_list.pop()
@@ -156,6 +160,18 @@ def gen_combinations_primary_jumpy(candidates, n):
             else:
                 # Try to move the previous pointer in the next loop
                 idx -= 1
+
+
+def check_allowed_funghis(adventure, candidates):
+    if 'allowed_funghis' not in adventure:
+        return True
+    if candidates is None:
+        return True
+    allowed_funghis = adventure['allowed_funghis']
+    for candidate in candidates:
+        if candidate[0] not in allowed_funghis:
+            return False
+    return True
 
 
 def calc_allocations_results(data, funghi_combinations):
