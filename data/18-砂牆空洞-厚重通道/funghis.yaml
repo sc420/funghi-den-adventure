@@ -525,9 +525,9 @@
   name: 紅土菇菇
   capacity: 1
   stats:
-    vitality: 135
-    intelligence: 135
-    speed: 90
+    vitality: 145
+    intelligence: 145
+    speed: 100
   skills:
     hard_head: 1
     insensitive: 1
@@ -537,9 +537,9 @@
   name: 滑馬次郎
   capacity: 1
   stats:
-    vitality: 135
-    intelligence: 90
-    speed: 90
+    vitality: 165
+    intelligence: 110
+    speed: 110
   skills:
     hard_head: 1
     バリア: 1
@@ -548,9 +548,9 @@
   name: 頭巾菇菇
   capacity: 1
   stats:
-    vitality: 95
-    intelligence: 140
-    speed: 95
+    vitality: 120
+    intelligence: 165
+    speed: 120
   skills:
     luck: 1
     courage: 1
