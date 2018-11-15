@@ -10,6 +10,10 @@ See comments in `data/all/*.yaml`.
 
 ## Examples
 
+### Single Adventure
+
+The default maximum number of allocation outputs is 10, use `--max` to adjust.
+
 ```shell
 python calc_single.py --data_dir=data/1-鼴鼠之洞-入口
 python calc_single.py --data_dir=data/2-鼴鼠之洞-中途
@@ -22,4 +26,12 @@ python calc_single.py --data_dir=data/15-清涼結冰洞-光滑通道
 python calc_single.py --data_dir=data/16-砂牆空洞-沙沙通道
 python calc_single.py --data_dir=data/17-砂牆空洞-隆起通道
 python calc_single.py --data_dir=data/18-砂牆空洞-厚重通道
+```
+
+### All Allocations
+
+`calc_all.py` calculates all allocations without specifying duplicated funghis. The former adventures in `--data_dirs` will be allocated first. This default maximum number of allocation outputs is 1, use `--max` to adjust.
+
+```shell
+python calc_all.py --data_dirs=data/18-砂牆空洞-厚重通道,data/15-清涼結冰洞-光滑通道,data/12-樹根隧道-中途 --funghis_path=data/all/funghis.yaml
 ```

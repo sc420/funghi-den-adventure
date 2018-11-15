@@ -1,4 +1,5 @@
 # Native modules
+import argparse
 import os
 
 # Third-party modules
@@ -8,32 +9,35 @@ import yaml
 import allocation_calculator.calc as calc
 
 
-# Select more difficult adventures first
-ORDERED_DATA_DIRS = [
-    'data/18-砂牆空洞-厚重通道',
-    'data/15-清涼結冰洞-光滑通道',
-    'data/12-樹根隧道-中途',
-]
-# Read only one funghis spec
-FUNGHI_PATH = 'data/all/funghis.yaml'
-# Limit the number of global allocations (set to 0 to ignore)
-GLOBAL_ALLOCATIONS_LIMIT = 1
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--data_dirs', help='data directories separated by commas')
+    parser.add_argument('--funghis_path', help='funghis spec path')
+    parser.add_argument(
+        '--max', type=int, default=1, help='the maximum number of global allocations'
+        ' (set 0 to be unlimited)')
+    args = parser.parse_args()
+    args.data_dirs = args.data_dirs.split(',')
+    return args
 
 
-def gen_all_best_results():
+def gen_all_best_results(args):
     allocated_counts = {}
     data_dir_idx = 0
-    first_results = gen_single_best_results(data_dir_idx, allocated_counts)
+    first_results = gen_single_best_results(
+        args, data_dir_idx, allocated_counts)
     before_results = [first_results]
     before_pointers = [0]
     while data_dir_idx >= 0:
         # Check whether to generate new best results
         if data_dir_idx >= len(before_pointers):
-            results = gen_single_best_results(data_dir_idx, allocated_counts)
+            results = gen_single_best_results(
+                args, data_dir_idx, allocated_counts)
             before_results.append(results)
             before_pointers.append(0)
             # Check whether to yield the output
-            if len(before_pointers) >= len(ORDERED_DATA_DIRS):
+            if len(before_pointers) >= len(args.data_dirs):
                 output = []
                 for results, pointer in zip(before_results, before_pointers):
                     max_score = results['max_score']
@@ -74,9 +78,9 @@ def gen_all_best_results():
                 data_dir_idx += 1
 
 
-def gen_single_best_results(data_dir_idx, allocated_counts):
-    data_dir = ORDERED_DATA_DIRS[data_dir_idx]
-    data = load_data(data_dir)
+def gen_single_best_results(args, data_dir_idx, allocated_counts):
+    data_dir = args.data_dirs[data_dir_idx]
+    data = load_data(data_dir, args.funghis_path)
     filter_out_allocated_funghis(data, allocated_counts)
     calc.normalize_data(data)
     calc.filter_out_subset_funghis(data)
@@ -90,9 +94,8 @@ def gen_single_best_results(data_dir_idx, allocated_counts):
     return calc.filter_best_results(funghi_combinations, results)
 
 
-def load_data(data_dir):
+def load_data(data_dir, funghis_path):
     adventures_path = os.path.join(data_dir, 'adventures.yaml')
-    funghis_path = FUNGHI_PATH
     rewards_path = os.path.join(data_dir, 'rewards.yaml')
     with open(adventures_path, 'r', encoding='utf8') as stream:
         adventures = yaml.load(stream)
@@ -133,16 +136,18 @@ def add_combination_to_allocated_counts(combination, allocated_counts):
 
 
 def main():
-    data_list = [load_data(data_dir) for data_dir in ORDERED_DATA_DIRS]
+    args = parse_args()
+    data_list = [load_data(data_dir, args.funghis_path)
+                 for data_dir in args.data_dirs]
     print('All global allocations:')
-    for idx, all_results in enumerate(gen_all_best_results()):
+    for idx, all_results in enumerate(gen_all_best_results(args)):
         print('Global Allocation #{}'.format(idx + 1))
         print()
         for data, results in zip(data_list, all_results):
             calc.list_best_allocations(data, results)
         print('-----')
         # Check the limit
-        if GLOBAL_ALLOCATIONS_LIMIT > 0 and idx + 1 >= GLOBAL_ALLOCATIONS_LIMIT:
+        if args.max > 0 and idx + 1 >= args.max:
             print('The limit has been reached')
             break
 
