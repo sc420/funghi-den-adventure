@@ -1,0 +1,123 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E5%B2%A9%E7%9F%B3%E3%83%88%E3%83%B3%E3%83%8D%E3%83%AB
+
+4:
+  name: 岩石隧道(中途) # 岩石トンネル(なかごろ)
+  capacity: 3
+  requirements:
+    1:
+      name: 跨越小岩石吧！
+      stats:
+      - vitality: 50
+      rewards:
+        hard_rock: 2
+    2:
+      name: 運氣好就不會被砸到
+      stats:
+      - vitality: 60
+      boosts:
+      - luck:
+          vitality: 50
+      rewards:
+        square_stone: 1
+    3:
+      name: 跨越中等岩石吧！
+      stats:
+      - vitality: 80
+      rewards:
+        tea_stone: 1
+    4:
+      name: 跨越大岩石吧！
+      stats:
+      - vitality: 90
+      rewards:
+        square_stone: 2
+    5:
+      name: 在坍塌前運出去吧！
+      stats:
+      - vitality: 95
+      boosts:
+      - hard_head:
+          vitality: 35
+      rewards:
+        tea_stone: 1
+    6:
+      name: 跨越巨大岩石吧！
+      stats:
+      - vitality: 100
+      rewards:
+        tea_stone: 2
+    7:
+      name: 清理岩石吧
+      stats:
+      - vitality: 60
+      - vitality: 60
+      rewards:
+        reversible_stone: 1
+    8:
+      name: 把大岩石移開吧
+      stats:
+      - vitality: 80
+      - vitality: 80
+      rewards:
+        bridge_stone: 1
+    9:
+      name: 凹凸道路
+      stats:
+      - speed: 60
+      rewards:
+        hard_rock: 1
+    10:
+      name: 小心落石
+      stats:
+      - speed: 75
+      boosts:
+      - hard_head:
+          speed: 15
+      rewards:
+        hard_rock: 2
+    11:
+      name: 無數的落石
+      stats:
+      - speed: 100
+      boosts:
+      - hard_head:
+          speed: 20
+      rewards:
+        tea_stone: 1
+    12:
+      name: 躲開落石！
+      stats:
+      - speed: 90
+      - speed: 90
+      - speed: 90
+      boosts:
+      - luck:
+          speed: 20
+      rewards:
+        tea_stone: 2
+    13:
+      name: 推得動大岩石嗎？
+      reduce_stats:
+        vitality: 260
+      reduce_boosts:
+      - hard_head:
+          vitality: 15
+      rewards:
+        reversible_stone: 2
+    14:
+      name: 堅硬岩石的弱點
+      stats:
+      - vitality: 90
+      boosts:
+      - horn:
+          vitality: 30
+      rewards:
+        hard_rock: 3
+    15:
+      name: 空手有點強人所難
+      skills:
+      - weaponry: 1
+      rewards:
+        tea_stone: 1
+  perfect_rewards:
+    bridge_stone: 2
