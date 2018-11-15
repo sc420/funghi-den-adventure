@@ -1,32 +1,41 @@
 # Native modules
 import argparse
 import os
+import sys
 
 # Third-party modules
 import yaml
 
 # Project modules
 import allocation_calculator.calc as calc
+import allocation_calculator.program_args as p_args
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_dir', help='data directory')
+    parser.add_argument('--data_dir', default=None,
+                        help='data directory containing adventures, funghis'
+                        ' and rewards spec files')
+    parser.add_argument('--adventures_path', default=None,
+                        help='adventures spec path')
+    parser.add_argument('--funghis_path', default=None,
+                        help='funghis spec path')
+    parser.add_argument('--rewards_path', default=None,
+                        help='rewards spec path')
     parser.add_argument(
         '--max', type=int, default=10, help='the maximum number of allocations'
         ' (set 0 to be unlimited)')
-    return parser.parse_args()
+    args = parser.parse_args()
+    p_args.gen_spec_paths(args)
+    return args
 
 
 def load_data(args):
-    adventures_path = os.path.join(args.data_dir, 'adventures.yaml')
-    funghis_path = os.path.join(args.data_dir, 'funghis.yaml')
-    rewards_path = os.path.join(args.data_dir, 'rewards.yaml')
-    with open(adventures_path, 'r', encoding='utf8') as stream:
+    with open(args.adventures_path, 'r', encoding='utf8') as stream:
         adventures = yaml.load(stream)
-    with open(funghis_path, 'r', encoding='utf8') as stream:
+    with open(args.funghis_path, 'r', encoding='utf8') as stream:
         funghis = yaml.load(stream)
-    with open(rewards_path, 'r', encoding='utf8') as stream:
+    with open(args.rewards_path, 'r', encoding='utf8') as stream:
         rewards = yaml.load(stream)
     return {
         'adventures': adventures,
