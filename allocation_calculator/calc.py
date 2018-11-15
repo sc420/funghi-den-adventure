@@ -441,7 +441,7 @@ def list_best_allocations(data, best_results):
     # Print the max score
     print('Max score: {}'.format(max_score))
     # List all allocations of the max score
-    print('Best allocations:')
+    print('Best allocations ({}):'.format(len(rate_and_combinations)))
     for idx, (success_rate, combination) in enumerate(rate_and_combinations):
         print('#{}'.format(idx + 1))
         print('Success rate: {:.2f}%'.format(success_rate))

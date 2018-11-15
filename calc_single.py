@@ -9,6 +9,10 @@ import yaml
 import allocation_calculator.calc as calc
 
 
+# Limit the number of allocations (set to 0 to ignore)
+ALLOCATIONS_LIMIT = 10
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', help='data directory')
@@ -32,6 +36,18 @@ def load_data(args):
     }
 
 
+def limit_best_results(best_results):
+    if ALLOCATIONS_LIMIT <= 0:
+        return
+    rate_and_combinations = best_results['rate_and_combinations']
+    if len(rate_and_combinations) > ALLOCATIONS_LIMIT:
+        rate_and_combinations = rate_and_combinations[:ALLOCATIONS_LIMIT]
+        best_results['rate_and_combinations'] = rate_and_combinations
+        return True
+    else:
+        return False
+
+
 def main():
     args = parse_args()
     data = load_data(args)
@@ -44,7 +60,10 @@ def main():
     funghi_combinations = calc.gen_funghi_combinations(
         data, total_adventure_capacity, total_funghi_capacity)
     best_results = calc.filter_best_results(funghi_combinations, results)
+    limited = limit_best_results(best_results)
     calc.list_best_allocations(data, best_results)
+    if limited:
+        print('The limit has been reached')
 
 
 if __name__ == '__main__':
