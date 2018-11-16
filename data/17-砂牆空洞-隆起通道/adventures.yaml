@@ -97,7 +97,7 @@
       - luck:
           speed: 30
       rewards:
-        小小零件: 1
+        小顆零件: 1
     12:
       name: 不要弄倒棒子......
       reduce_stats:
