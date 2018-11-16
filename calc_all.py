@@ -14,9 +14,9 @@ def parse_args():
     parser.add_argument(
         '--data_dirs', help='data directories separated by commas')
     parser.add_argument('--funghis_path', help='funghis spec path')
-    parser.add_argument(
-        '--max', type=int, default=1, help='the maximum number of global allocations'
-        ' (set 0 to be unlimited)')
+    parser.add_argument('--max', type=int, default=1,
+                        help='the maximum number of global allocations'
+                        ' (set 0 to be unlimited)')
     args = parser.parse_args()
     args.data_dirs = args.data_dirs.split(',')
     return args
