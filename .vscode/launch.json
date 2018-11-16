@@ -16,7 +16,20 @@
             ]
         },
         {
-            "name": "calc_all.py",
+            "name": "calc_compatible.py (11,12)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/calc_compatible.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--data_dirs",
+                "data/11-樹根隧道-入口,data/12-樹根隧道-中途",
+                "--funghis_path",
+                "data/all/funghis.yaml"
+            ]
+        },
+        {
+            "name": "calc_all.py (18,15,12)",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/calc_all.py",
