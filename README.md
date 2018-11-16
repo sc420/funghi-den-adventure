@@ -19,6 +19,8 @@ python calc_single.py --data_dir=data/1-鼴鼠之洞-入口 --funghis_path=data/
 python calc_single.py --data_dir=data/2-鼴鼠之洞-中途 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/3-岩石隧道-入口 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/4-岩石隧道-中途 --funghis_path=data/all/funghis.yaml
+python calc_single.py --data_dir=data/9-螢火蟲之路-入口 --funghis_path=data/all/funghis.yaml
+python calc_single.py --data_dir=data/10-螢火蟲之路-中途 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/11-樹根隧道-入口 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/12-樹根隧道-中途 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/13-清涼結冰洞-筆直通道 --funghis_path=data/all/funghis.yaml
@@ -37,6 +39,7 @@ python calc_single.py --data_dir=data/19-灼熱熔岩窟-咕嘟咕嘟區 --fungh
 ```shell
 python calc_compatible.py --data_dirs=data/1-鼴鼠之洞-入口,data/2-鼴鼠之洞-中途 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/3-岩石隧道-入口,data/4-岩石隧道-中途 --funghis_path=data/all/funghis.yaml
+python calc_compatible.py --data_dirs=data/9-螢火蟲之路-入口,data/10-螢火蟲之路-中途 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/11-樹根隧道-入口,data/12-樹根隧道-中途 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/13-清涼結冰洞-筆直通道,data/14-清涼結冰洞-凹凸通道,data/15-清涼結冰洞-光滑通道 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/16-砂牆空洞-沙沙通道,data/17-砂牆空洞-隆起通道,data/18-砂牆空洞-厚重通道 --funghis_path=data/all/funghis.yaml
@@ -47,5 +50,5 @@ python calc_compatible.py --data_dirs=data/16-砂牆空洞-沙沙通道,data/17-
 `calc_all.py` calculates best allocations for multiple adventures without specifying duplicated funghis. The former adventures in `--data_dirs` will be allocated first. This default maximum number of allocation outputs is 1, use `--max` to adjust.
 
 ```shell
-python calc_all.py --data_dirs=data/18-砂牆空洞-厚重通道,data/15-清涼結冰洞-光滑通道,data/12-樹根隧道-中途 --funghis_path=data/all/funghis.yaml
+python calc_all.py --data_dirs=data/18-砂牆空洞-厚重通道,data/15-清涼結冰洞-光滑通道,data/12-樹根隧道-中途,data/10-螢火蟲之路-中途 --funghis_path=data/all/funghis.yaml
 ```
