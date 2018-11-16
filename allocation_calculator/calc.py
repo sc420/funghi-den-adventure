@@ -407,6 +407,9 @@ def calc_weighted_score(rewards, req_rewards):
     for req_reward_name, req_reward_value in req_rewards.items():
         if req_reward_name in rewards:
             score += rewards[req_reward_name] * req_reward_value
+        else:
+            raise ValueError(
+                'Could not find "{}" in rewards'.format(req_reward_name))
     return score
 
 
