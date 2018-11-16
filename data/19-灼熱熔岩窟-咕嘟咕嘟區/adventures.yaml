@@ -1,0 +1,120 @@
+19:
+  name: 灼熱熔岩窟(咕嘟咕嘟區)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 4
+  - 5
+  - 21
+  - 22
+  - 26
+  - 27
+  - 34
+  - 39
+  - 43
+  requirements:
+    1:
+      name: 頭上的岩石
+      stats:
+      - vitality: 100
+      rewards:
+        黑砂鐵: 1
+    2:
+      name: 頭上的硬岩
+      stats:
+      - vitality: 130
+      boosts:
+      - horn:
+          vitality: 40
+      rewards:
+        熔岩球: 1
+    3:
+      name: 頭上的巨岩
+      stats:
+      - vitality: 160
+      boosts:
+      - horn:
+          vitality: 40
+      rewards:
+        黑砂鐵: 2
+    4:
+      name: 在頭上跑岩石接力賽
+      stats:
+      - vitality: 160
+      - vitality: 160
+      boosts:
+      - horn:
+          vitality: 40
+      rewards:
+        熔岩球: 2
+    5:
+      name: 尋找休息站
+      stats:
+      - intelligence: 100
+      boosts:
+      - food:
+          intelligence: 25
+      rewards:
+        黑砂鐵: 1
+    6:
+      name: 確認安全
+      stats:
+      - intelligence: 150
+      rewards:
+        紅砂鐵: 1
+    7:
+      name: 好好休息
+      reduce_stats:
+        intelligence: 350
+      boosts:
+      - food:
+          intelligence: 20
+      rewards:
+        熔岩球: 2
+    8:
+      name: 熱呼呼地面
+      stats:
+      - speed: 100
+      rewards:
+        黑砂鐵: 1
+    9:
+      name: 熱騰騰地面
+      stats:
+      - speed: 130
+      rewards:
+        熔岩球: 1
+    10:
+      name: 酷熱叉路
+      stats:
+      - speed: 120
+      - speed: 120
+      rewards:
+        紅砂鐵: 1
+    11:
+      name: 燙手搬岩石
+      stats:
+      - vitality: 120
+        intelligence: 120
+      boosts:
+      - horn:
+          vitality: 30
+      rewards:
+        黑砂鐵: 2
+    12:
+      name: 超越鐵板區
+      stats:
+      - vitality: 120
+        speed: 120
+      boosts:
+      - horn:
+          vitality: 30
+      rewards:
+        熔岩球: 1
+    13:
+      name: 打壞乾掉的牆壁
+      skills:
+      - weaponry: 1
+      rewards:
+        紅砂鐵: 1
+  perfect_rewards:
+    熔岩球: 3
