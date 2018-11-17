@@ -22,7 +22,7 @@ def parse_args():
     return args
 
 
-def gen_all_best_results(args):
+def gen_global_best_results(args):
     allocated_counts = {}
     data_dir_idx = 0
     first_results = gen_single_best_results(
@@ -141,10 +141,10 @@ def main():
                  for data_dir in args.data_dirs]
     print('All global allocations:')
     has_global = False
-    for idx, all_results in enumerate(gen_all_best_results(args)):
+    for idx, global_results in enumerate(gen_global_best_results(args)):
         print('Global Allocation #{}'.format(idx + 1))
         print()
-        for data, results in zip(data_list, all_results):
+        for data, results in zip(data_list, global_results):
             calc.list_best_allocations(data, results)
         print('-----')
         has_global = True

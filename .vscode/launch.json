@@ -29,10 +29,10 @@
             ]
         },
         {
-            "name": "calc_all.py (18,15,12)",
+            "name": "calc_global.py (18,15,12)",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/calc_all.py",
+            "program": "${workspaceFolder}/calc_global.py",
             "console": "integratedTerminal",
             "args": [
                 "--data_dirs",
