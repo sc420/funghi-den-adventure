@@ -140,16 +140,20 @@ def main():
     data_list = [load_data(data_dir, args.funghis_path)
                  for data_dir in args.data_dirs]
     print('All global allocations:')
+    has_global = False
     for idx, all_results in enumerate(gen_all_best_results(args)):
         print('Global Allocation #{}'.format(idx + 1))
         print()
         for data, results in zip(data_list, all_results):
             calc.list_best_allocations(data, results)
         print('-----')
+        has_global = True
         # Check the limit
         if args.max > 0 and idx + 1 >= args.max:
             print('The limit has been reached')
             break
+    if not has_global:
+        print('There are no global allocations')
 
 
 if __name__ == '__main__':

@@ -414,6 +414,11 @@ def calc_weighted_score(rewards, req_rewards):
 
 
 def filter_best_results(funghi_combinations, results):
+    if len(results) <= 0:
+        return {
+            'max_score': 0.0,
+            'rate_and_combinations': [],
+        }
     # Calculate the max score
     scores = [result['score'] for result in results]
     max_score = max(scores)
