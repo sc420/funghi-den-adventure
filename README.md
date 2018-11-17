@@ -1,4 +1,12 @@
-# Funghi's Den Adventure Allocation Calculator
+# Funghi's Den Adventure Assignment Calculator
+
+It calculates best funghis to use in single or multiple adventures.
+
+It has the following additional features:
+
+* You can specify the importance of rewards
+* You can limit the number of possible assignment outputs
+* You can build your own programs with the help of existing functions easily
 
 ## Specifications
 
@@ -7,6 +15,7 @@ See comments in `data/all/*.yaml`.
 ## Requirements
 
 1. [Python 3.7](https://www.anaconda.com/download/)
+2. `pyyaml` package (Type `pip install pyyaml` to install)
 
 ## Examples
 
