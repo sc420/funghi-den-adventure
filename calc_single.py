@@ -25,8 +25,35 @@ def parse_args():
     parser.add_argument(
         '--max', type=int, default=10, help='the maximum number of allocations'
         ' (set 0 to be unlimited)')
+    # Report score
+    parser.add_argument('--report_score', dest='report_score',
+                        action='store_true', help='report score')
+    parser.add_argument('--no_report_score', dest='report_score',
+                        action='store_false', help='do not report score')
+    parser.set_defaults(report_score=True)
+    # Report success rate
+    parser.add_argument('--report_success_rate', dest='report_success_rate',
+                        action='store_true', help='report success rate')
+    parser.add_argument('--no_report_success_rate', dest='report_success_rate',
+                        action='store_false', help='do not report success rate')
+    parser.set_defaults(report_success_rate=True)
+    # Report failed requirement
+    parser.add_argument('--report_failed_requirement',
+                        dest='report_failed_requirement', action='store_true',
+                        help='report failed requirement')
+    parser.add_argument('--no_report_failed_requirement',
+                        dest='report_failed_requirement', action='store_false',
+                        help='do not report failed requirement')
+    parser.set_defaults(report_failed_requirement=True)
+    # One switch to turn off all additional reports
+    parser.add_argument('--no_additional', default=False, action='store_true',
+                        help='do not report any additional information')
     args = parser.parse_args()
     p_args.gen_spec_paths(args)
+    if args.no_additional:
+        args.report_score = False
+        args.report_success_rate = False
+        args.report_failed_requirement = False
     return args
 
 
@@ -47,10 +74,9 @@ def load_data(args):
 def limit_best_results(best_results, max_results):
     if max_results <= 0:
         return
-    rate_and_combinations = best_results['rate_and_combinations']
-    if len(rate_and_combinations) > max_results:
-        rate_and_combinations = rate_and_combinations[:max_results]
-        best_results['rate_and_combinations'] = rate_and_combinations
+    results = best_results['results']
+    if len(results) > max_results:
+        best_results['results'] = results[:max_results]
         return True
     else:
         return False
@@ -69,7 +95,9 @@ def main():
         data, total_adventure_capacity, total_funghi_capacity)
     best_results = calc.filter_best_results(data, funghi_combinations, results)
     limited = limit_best_results(best_results, args.max)
-    calc.list_best_allocations(data, best_results)
+    calc.list_best_allocations(data, best_results, args.report_score,
+                               args.report_success_rate,
+                               args.report_failed_requirement)
     if limited:
         print('The limit has been reached')
 

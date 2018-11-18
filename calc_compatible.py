@@ -113,10 +113,10 @@ def load_data(data_dir, funghis_path):
 
 
 def convert_to_combinations_set(best_results):
-    rate_and_combinations = best_results['rate_and_combinations']
+    results = best_results['results']
     combinations = []
-    for rate_and_combination in rate_and_combinations:
-        combination = rate_and_combination[1]
+    for result in results:
+        combination = result[0]
         funghis = next(iter(combination.values()))
         combinations.append(set(funghis))
     return combinations

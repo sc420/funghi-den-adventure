@@ -4,7 +4,8 @@
         "funghi",
         "funghis",
         "issubset",
-        "itertools"
+        "itertools",
+        "pyyaml"
     ],
     "cSpell.enabledLanguageIds": [
         "asciidoc",

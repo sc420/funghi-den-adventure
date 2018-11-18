@@ -417,33 +417,34 @@ def filter_best_results(data, funghi_combinations, results):
     if len(results) <= 0:
         return {
             'max_score': 0.0,
-            'rate_and_combinations': [],
+            'results': [],
         }
     # Calculate the max score
     scores = [result['score'] for result in results]
     max_score = max(scores)
     # Keep the combinations with the same max score
-    rate_and_combinations = []
+    filtered_results = []
     for combination, result in zip(funghi_combinations, results):
         score = result['score']
+        req_report = result['requirement_report']
         if score >= max_score:
             success_rate = calc_success_rate(data, result)
-            rate_and_combinations.append((success_rate, combination))
+            filtered_results.append((combination, success_rate, req_report))
     # Sort the combinations by success rate
-    rate_and_combinations = sorted(
-        rate_and_combinations, key=lambda t: t[0], reverse=True)
+    filtered_results = sorted(
+        filtered_results, key=lambda t: t[1], reverse=True)
     return {
         'max_score': max_score,
-        'rate_and_combinations': rate_and_combinations,
+        'results': filtered_results,
     }
 
 
 def calc_success_rate(data, result):
     adventures = data['adventures']
-    requirement_report = result['requirement_report']
+    req_report = result['requirement_report']
     success_count = 0
     requirement_count = 0
-    for adventure_id, met_requirements in requirement_report.items():
+    for adventure_id, met_requirements in req_report.items():
         adventure = adventures[adventure_id]
         success_count += len(met_requirements)
         requirement_count += len(adventure['requirements'])
@@ -453,25 +454,32 @@ def calc_success_rate(data, result):
         return 0.0
 
 
-def list_best_allocations(data, best_results):
+def list_best_allocations(data, best_results, report_score=True,
+                          report_success_rate=True,
+                          report_failed_requirement=True):
     max_score = best_results['max_score']
-    rate_and_combinations = best_results['rate_and_combinations']
-    # Print the max score
-    print('Max score: {}'.format(max_score))
+    results = best_results['results']
+    if report_score:
+        # Print the max score
+        print('Max score: {}'.format(max_score))
     # List all allocations of the max score
-    print('Best allocations ({}):'.format(len(rate_and_combinations)))
-    for idx, (success_rate, combination) in enumerate(rate_and_combinations):
+    print('Best allocations ({}):'.format(len(results)))
+    for idx, (combination, success_rate, req_report) in enumerate(results):
         print('#{}'.format(idx + 1))
-        print('Success rate: {:.2f}%'.format(success_rate))
-        print_best_allocation(data, combination)
+        if report_success_rate:
+            print('Success rate: {:.2f}%'.format(success_rate))
+        print_best_allocation(
+            data, combination, req_report, report_failed_requirement)
         print()
 
 
-def print_best_allocation(data, funghi_combination):
+def print_best_allocation(data, funghi_combination, req_report,
+                          report_failed_requirement=True):
     adventures = data['adventures']
     funghis = data['funghis']
     for adventure_id, adventure_allocation in funghi_combination.items():
         adventure = adventures[adventure_id]
+        # Print funghi names
         funghi_names = []
         for funghi_id in adventure_allocation:
             if funghi_id == EMPTY_ID:
@@ -480,3 +488,12 @@ def print_best_allocation(data, funghi_combination):
                 funghi = funghis[funghi_id]
                 funghi_names.append(funghi['name'])
         print('{}: {}'.format(adventure['name'], ', '.join(funghi_names)))
+        # Print failed requirement names
+        if report_failed_requirement:
+            requirements = adventure['requirements']
+            met_requirements = req_report[adventure_id]
+            failed_requirement_ids = set(requirements) - set(met_requirements)
+            req_names = [requirements[req_id]['name']
+                         for req_id in failed_requirement_ids]
+            if len(req_names) > 0:
+                print('Failed requirements: {}'.format(', '.join(req_names)))
