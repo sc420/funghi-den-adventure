@@ -40,13 +40,6 @@
                 "--funghis_path",
                 "data/all/funghis.yaml"
             ]
-        },
-        {
-            "name": "test_calc.py",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/allocation_calculator/test_calc.py",
-            "console": "integratedTerminal"
         }
     ]
 }

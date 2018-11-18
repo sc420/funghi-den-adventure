@@ -8,14 +8,21 @@ It has the following additional features:
 * You can limit the number of possible assignment outputs
 * You can build your own programs with the help of existing functions easily
 
-## Specifications
-
-See comments in `data/all/*.yaml`.
-
 ## Requirements
 
 1. [Python 3.7](https://www.anaconda.com/download/)
 2. `pyyaml` package (Type `pip install pyyaml` to install)
+
+## How to Use
+
+1. Edit `data/all/funghis.yaml`
+2. Run one of the following examples
+
+Or create your own `funghis.yaml` and change the value of `--funghis_path` to the path.
+
+## Specifications
+
+See comments in `data/all/*.yaml`.
 
 ## Examples
 

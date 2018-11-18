@@ -6,7 +6,7 @@ import unittest
 import yaml
 
 # Project modules
-import calc
+import allocation_calculator.calc as calc
 
 
 class TestMain(unittest.TestCase):
