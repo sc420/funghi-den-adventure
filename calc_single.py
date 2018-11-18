@@ -67,7 +67,7 @@ def main():
     results = calc.calc_allocations_results(data, funghi_combinations)
     funghi_combinations = calc.gen_funghi_combinations(
         data, total_adventure_capacity, total_funghi_capacity)
-    best_results = calc.filter_best_results(funghi_combinations, results)
+    best_results = calc.filter_best_results(data, funghi_combinations, results)
     limited = limit_best_results(best_results, args.max)
     calc.list_best_allocations(data, best_results)
     if limited:

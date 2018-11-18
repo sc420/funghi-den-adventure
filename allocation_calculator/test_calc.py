@@ -142,8 +142,16 @@ item11: 100.0
 
     def test_1(self):
         EXPECTED_SCORES = [14.0, 14.0, 21.0]
-        EXPECTED_SUCCESS_COUNTS = [4, 4, 5]
-        EXPECTED_REQUIREMENT_COUNTS = [9, 9, 9]
+        EXPECTED_REQUIREMENT_REPORTS = [{
+            1: [1, 2],
+            2: [1, 2],
+        }, {
+            1: [1, 2],
+            2: [1, 2],
+        }, {
+            1: [1, 2, 3],
+            2: [1, 2],
+        }]
         data = self.load_data(self.STUB_ADVENTURES,
                               self.STUB_FUNGHIS, self.STUB_REWARDS)
         calc.normalize_data(data)
@@ -153,12 +161,10 @@ item11: 100.0
             data, total_adventure_capacity, total_funghi_capacity)
         results = calc.calc_allocations_results(data, funghi_combinations)
         scores = [result['score'] for result in results]
-        success_counts = [result['success_count'] for result in results]
-        requirement_counts = [result['requirement_count']
-                              for result in results]
+        requirement_reports = [result['requirement_report']
+                               for result in results]
         self.assertAlmostEqual(scores, EXPECTED_SCORES)
-        self.assertEqual(success_counts, EXPECTED_SUCCESS_COUNTS)
-        self.assertEqual(requirement_counts, EXPECTED_REQUIREMENT_COUNTS)
+        self.assertEqual(requirement_reports, EXPECTED_REQUIREMENT_REPORTS)
 
     def load_data(self, adventures, funghis, rewards):
         adventures_data = yaml.load(adventures)

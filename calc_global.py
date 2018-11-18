@@ -91,7 +91,7 @@ def gen_single_best_results(args, data_dir_idx, allocated_counts):
     results = calc.calc_allocations_results(data, funghi_combinations)
     funghi_combinations = calc.gen_funghi_combinations(
         data, total_adventure_capacity, total_funghi_capacity)
-    return calc.filter_best_results(funghi_combinations, results)
+    return calc.filter_best_results(data, funghi_combinations, results)
 
 
 def load_data(data_dir, funghis_path):

@@ -247,8 +247,7 @@ def calc_allocations_results(data, funghi_combinations):
     # Calculate score for each allocation
     for funghi_combination in funghi_combinations:
         score = 0.0
-        success_count = 0
-        requirement_count = 0
+        requirement_report = {}
         # Look through each adventure
         for adventure_id, adventure_allocation in funghi_combination.items():
             # If an empty funghi is in the allocation, the adventure fails
@@ -260,24 +259,25 @@ def calc_allocations_results(data, funghi_combinations):
             requirements = adventure['requirements']
             # Look through each requirement
             all_requirements_met = True
-            for requirement in requirements.values():
+            met_requirements = []
+            for requirement_id, requirement in requirements.items():
                 augmented_funghis = gen_augmented_funghis(
                     requirement, allocated_funghis)
                 if is_requirement_met(requirement, augmented_funghis):
                     req_rewards = requirement['rewards']
                     score += calc_weighted_score(rewards, req_rewards)
-                    success_count += 1
+                    met_requirements.append(requirement_id)
                 else:
                     all_requirements_met = False
-                requirement_count += 1
             # Add score of perfect reward if all requirements are met
             if all_requirements_met:
                 req_rewards = adventure['perfect_rewards']
                 score += calc_weighted_score(rewards, req_rewards)
+            # Add met requirement IDs to requirement report
+            requirement_report[adventure_id] = met_requirements
         results.append({
             'score': score,
-            'success_count': success_count,
-            'requirement_count': requirement_count,
+            'requirement_report': requirement_report,
         })
     return results
 
@@ -413,7 +413,7 @@ def calc_weighted_score(rewards, req_rewards):
     return score
 
 
-def filter_best_results(funghi_combinations, results):
+def filter_best_results(data, funghi_combinations, results):
     if len(results) <= 0:
         return {
             'max_score': 0.0,
@@ -427,20 +427,30 @@ def filter_best_results(funghi_combinations, results):
     for combination, result in zip(funghi_combinations, results):
         score = result['score']
         if score >= max_score:
-            success_count = result['success_count']
-            requirement_count = result['requirement_count']
-            if requirement_count > 0:
-                success_rate = success_count / requirement_count * 100.0
-            else:
-                success_rate = 0.0
+            success_rate = calc_success_rate(data, result)
             rate_and_combinations.append((success_rate, combination))
-    # Sort the combinations by score
+    # Sort the combinations by success rate
     rate_and_combinations = sorted(
         rate_and_combinations, key=lambda t: t[0], reverse=True)
     return {
         'max_score': max_score,
         'rate_and_combinations': rate_and_combinations,
     }
+
+
+def calc_success_rate(data, result):
+    adventures = data['adventures']
+    requirement_report = result['requirement_report']
+    success_count = 0
+    requirement_count = 0
+    for adventure_id, met_requirements in requirement_report.items():
+        adventure = adventures[adventure_id]
+        success_count += len(met_requirements)
+        requirement_count += len(adventure['requirements'])
+    if requirement_count > 0:
+        return success_count / requirement_count * 100.0
+    else:
+        return 0.0
 
 
 def list_best_allocations(data, best_results):
