@@ -51,6 +51,7 @@ python calc_single.py --data_dir=data/17-砂牆空洞-隆起通道 --funghis_pat
 python calc_single.py --data_dir=data/18-砂牆空洞-厚重通道 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/19-灼熱熔岩窟-咕嘟咕嘟區 --funghis_path=data/all/funghis.yaml
 python calc_single.py --data_dir=data/20-灼熱熔岩窟-滾燙滾燙區 --funghis_path=data/all/funghis.yaml
+python calc_single.py --data_dir=data/21-灼熱熔岩窟-冒出泡泡區 --funghis_path=data/all/funghis.yaml
 ```
 
 ### Compatible Allocations
@@ -66,6 +67,7 @@ python calc_compatible.py --data_dirs=data/9-螢火蟲之路-入口,data/10-螢�
 python calc_compatible.py --data_dirs=data/11-樹根隧道-入口,data/12-樹根隧道-中途 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/13-清涼結冰洞-筆直通道,data/14-清涼結冰洞-凹凸通道,data/15-清涼結冰洞-光滑通道 --funghis_path=data/all/funghis.yaml
 python calc_compatible.py --data_dirs=data/16-砂牆空洞-沙沙通道,data/17-砂牆空洞-隆起通道,data/18-砂牆空洞-厚重通道 --funghis_path=data/all/funghis.yaml
+python calc_compatible.py --data_dirs=data/19-灼熱熔岩窟-咕嘟咕嘟區,data/20-灼熱熔岩窟-滾燙滾燙區,data/21-灼熱熔岩窟-冒出泡泡區 --funghis_path=data/all/funghis.yaml
 ```
 
 ### Global Allocations
