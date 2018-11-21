@@ -13,6 +13,7 @@
   - 39
   - 43
   - 56
+  - 57
   - 58
   requirements:
     1:
@@ -101,7 +102,7 @@
       - courage:
           vitality: 20
       rewards:
-        ???: 1
+        紅砂鐵: 2
     12:
       name: 衝出炎熱的房間吧
       stats:
