@@ -1,0 +1,123 @@
+21:
+  name: 灼熱熔岩窟(滾燙滾燙區)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 4
+  - 5
+  - 21
+  - 22
+  - 26
+  - 27
+  - 34
+  - 39
+  - 43
+  - 56
+  - 57
+  - 58
+  requirements:
+    1:
+      name: 頭上的岩石
+      stats:
+      - vitality: 120
+      rewards:
+        黑砂鐵: 2
+    2:
+      name: 頭上的硬岩
+      stats:
+      - vitality: 140
+      boosts:
+      - hard_head:
+          vitality: 40
+      rewards:
+        玻璃之樹: 1
+    3:
+      name: 頭上的巨岩
+      stats:
+      - vitality: 180
+      boosts:
+      - hard_head:
+          vitality: 40
+      rewards:
+        紅砂鐵: 1
+    4:
+      name: 在頭上跑岩石接力賽
+      stats:
+      - vitality: 160
+      - vitality: 160
+      boosts:
+      - hard_head:
+          vitality: 40
+      rewards:
+        玻璃之樹: 2
+    5:
+      name: 尋找休息站
+      stats:
+      - intelligence: 100
+      boosts:
+      - stealth:
+          intelligence: 25
+      rewards:
+        紅砂鐵: 1
+    6:
+      name: 確認安全
+      stats:
+      - intelligence: 160
+      rewards:
+        黃砂鐵: 1
+    7:
+      name: 好好休息
+      reduce_stats:
+        intelligence: 400
+      boosts:
+      - stealth:
+          intelligence: 20
+      rewards:
+        玻璃之樹: 2
+    8:
+      name: 熱呼呼地面
+      stats:
+      - speed: 110
+      rewards:
+        黑砂鐵: 1
+    9:
+      name: 熱騰騰地面
+      stats:
+      - speed: 140
+      rewards:
+        玻璃之樹: 1
+    10:
+      name: 酷熱叉路
+      stats:
+      - speed: 130
+      - speed: 130
+      rewards:
+        黃砂鐵: 1
+    11:
+      name: 偷偷搬岩石
+      stats:
+      - vitality: 130
+        intelligence: 120
+      boosts:
+      - stealth:
+          vitality: 20
+      rewards:
+        紅砂鐵: 2
+    12:
+      name: 溫熱天花板房
+      stats:
+      - vitality: 130
+        speed: 120
+      boosts:
+      - hard_head:
+          vitality: 30
+      rewards:
+        玻璃之樹: 1
+    13:
+      name: 打壞乾掉的牆壁
+      skills:
+      - weaponry: 1
+      rewards:
+        紅砂鐵: 1
+  perfect_rewards:
+    玻璃之樹: 3

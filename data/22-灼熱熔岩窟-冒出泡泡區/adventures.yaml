@@ -1,0 +1,123 @@
+22:
+  name: 灼熱熔岩窟(冒出泡泡區)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 4
+  - 5
+  - 21
+  - 22
+  - 26
+  - 27
+  - 34
+  - 39
+  - 43
+  - 56
+  - 57
+  - 58
+  requirements:
+    1:
+      name: 頭上的岩石
+      stats:
+      - vitality: 130
+      rewards:
+        黑砂鐵: 2
+    2:
+      name: 頭上的硬岩
+      stats:
+      - vitality: 150
+      boosts:
+      - luck:
+          vitality: 40
+      rewards:
+        天然小刀: 1
+    3:
+      name: 頭上的巨岩
+      stats:
+      - vitality: 170
+      boosts:
+      - luck:
+          vitality: 40
+      rewards:
+        黃砂鐵: 2
+    4:
+      name: 在頭上跑岩石接力賽
+      stats:
+      - vitality: 160
+      - vitality: 160
+      boosts:
+      - luck:
+          vitality: 40
+      rewards:
+        天然小刀: 2
+    5:
+      name: 避開水源
+      stats:
+      - intelligence: 120
+      boosts:
+      - swimmer:
+          intelligence: 25
+      rewards:
+        紅砂鐵: 2
+    6:
+      name: 確認安全
+      stats:
+      - intelligence: 170
+      rewards:
+        黃砂鐵: 2
+    7:
+      name: 哪邊是溫水？
+      reduce_stats:
+        intelligence: 450
+      boosts:
+      - swimmer:
+          intelligence: 20
+      rewards:
+        天然小刀: 2
+    8:
+      name: 熱呼呼地面
+      stats:
+      - speed: 110
+      rewards:
+        黑砂鐵: 3
+    9:
+      name: 熱騰騰地面
+      stats:
+      - speed: 150
+      rewards:
+        天然小刀: 1
+    10:
+      name: 酷熱叉路
+      stats:
+      - speed: 140
+      - speed: 140
+      rewards:
+        黃砂鐵: 2
+    11:
+      name: 滾動搬岩石
+      stats:
+      - vitality: 140
+        intelligence: 120
+      boosts:
+      - courage:
+          vitality: 20
+      rewards:
+        紅砂鐵: 2
+    12:
+      name: 衝出炎熱的房間吧
+      stats:
+      - vitality: 140
+        speed: 120
+      boosts:
+      - courage:
+          vitality: 20
+      rewards:
+        天然小刀: 1
+    13:
+      name: 打壞乾掉的牆壁
+      skills:
+      - weaponry: 1
+      rewards:
+        紅砂鐵: 2
+  perfect_rewards:
+    天然小刀: 3

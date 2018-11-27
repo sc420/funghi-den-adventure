@@ -1,0 +1,117 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E7%A0%82%E5%A3%81%E3%81%AE%E7%A9%BA%E6%B4%9E
+
+18:
+  name: 砂牆空洞(隆起通道) # 砂壁の空洞(こんもり通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 6
+  - 13
+  - 14
+  - 17
+  - 19
+  - 20
+  - 23
+  - 47
+  - 52
+  - 53
+  - 54
+  requirements:
+    1:
+      name: 沙之道路
+      stats:
+      - vitality: 90
+      rewards:
+        彎彎零件: 1
+    2:
+      name: 深沙之道路
+      stats:
+      - vitality: 120
+      boosts:
+      - luck:
+          vitality: 20
+      rewards:
+        虹之砂: 1
+    3:
+      name: 直至腰身沙之道路
+      stats:
+      - vitality: 155
+      boosts:
+      - luck:
+          vitality: 30
+      rewards:
+        重重零件: 2
+    4:
+      name: 易坍的道路
+      stats:
+      - intelligence: 90
+      rewards:
+        重重零件: 1
+    5:
+      name: 快坍的道路
+      stats:
+      - intelligence: 110
+      rewards:
+        虹之砂: 1
+    6:
+      name: 開始崩塌的道路
+      stats:
+      - intelligence: 150
+      rewards:
+        虹之砂: 2
+    7:
+      name: 幾近崩塌的道路
+      stats:
+      - intelligence: 170
+      rewards:
+        小顆零件: 1
+    8:
+      name: 注意流沙的流向
+      stats:
+      - intelligence: 165
+      - intelligence: 165
+      rewards:
+        小顆零件: 1
+    9:
+      name: 在沙上奔馳
+      stats:
+      - speed: 155
+      rewards:
+        重重零件: 1
+    10:
+      name: 不要下沉衝過去吧
+      stats:
+      - speed: 165
+      - speed: 165
+      boosts:
+      - luck:
+          speed: 10
+      rewards:
+        虹之砂: 2
+    11:
+      name: 從流沙地域爬上來吧
+      stats:
+      - vitality: 120
+        speed: 120
+      boosts:
+      - luck:
+          speed: 30
+      rewards:
+        小顆零件: 1
+    12:
+      name: 不要弄倒棒子......
+      reduce_stats:
+        intelligence: 360
+      boosts:
+      - luck:
+          intelligence: 20
+      rewards:
+        重重零件: 2
+    13:
+      name: 撐過沙塵暴
+      skills:
+      - courage: 1
+      rewards:
+        重重零件: 1
+  perfect_rewards:
+    虹之砂: 3

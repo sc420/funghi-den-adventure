@@ -1,0 +1,165 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E3%82%B0%E3%83%84%E3%82%B0%E3%83%84%E9%96%93%E6%AC%A0%E6%B3%89
+
+9:
+  name: 咕嚕咕嚕間歇泉(中途) # グツグツ間欠泉(なかごろ)
+  capacity: 3
+  requirements:
+    1:
+      name: 熱蒸氣孔
+      stats:
+      - vitality: 70
+      rewards:
+        暖暖石: 1
+    2:
+      name: 過熱蒸氣孔
+      stats:
+      - vitality: 110
+      rewards:
+        除臭岩: 1
+    3:
+      name: 熱蒸氣孔∙一對
+      stats:
+      - vitality: 80
+      - vitality: 80
+      boosts:
+      - agile:
+          vitality: 10
+      rewards:
+        除臭岩: 1
+    4:
+      name: 過熱蒸氣孔∙一對
+      stats:
+      - vitality: 90
+      - vitality: 90
+      boosts:
+      - agile:
+          vitality: 20
+      rewards:
+        除臭岩: 2
+    5:
+      name: 間歇泉在哪裡？初級
+      stats:
+      - intelligence: 70
+      boosts:
+      - luck:
+          intelligence: 10
+      rewards:
+        溫泉之花: 1
+    6:
+      name: 間歇泉在哪裡？中級
+      stats:
+      - intelligence: 90
+      boosts:
+      - luck:
+          intelligence: 20
+      rewards:
+        饅頭的化石: 1
+    7:
+      name: 積聚瓦斯的通道
+      stats:
+      - speed: 80
+      rewards:
+        瓦斯球: 1
+    8:
+      name: 積聚濃密瓦斯的通道
+      stats:
+      - speed: 90
+      boosts:
+      - agile:
+          speed: 10
+      rewards:
+        瓦斯球: 2
+    9:
+      name: 充滿瓦斯的通道
+      stats:
+      - speed: 100
+      boosts:
+      - agile:
+          speed: 10
+      rewards:
+        饅頭的化石: 1
+    10:
+      name: 泳渡溫水
+      stats:
+      - vitality: 70
+        speed: 80
+      boosts:
+      - swimmer:
+          speed: 20
+      rewards:
+        琥珀菇: 1
+    11:
+      name: 落石叩叩
+      reduce_stats:
+        vitality: 300
+      boosts:
+      - hard_head:
+          vitality: 20
+      rewards:
+        溫泉之花: 1
+    12:
+      name: 落石隆隆
+      reduce_stats:
+        vitality: 360
+      boosts:
+      - hard_head:
+          vitality: 30
+      rewards:
+        琥珀菇: 1
+    13:
+      name: 落石咻咻
+      reduce_stats:
+        vitality: 360
+      boosts:
+      - short_range_attack:
+          vitality: 30
+      rewards:
+        暖暖石: 2
+    14:
+      name: 其中一個池子好像很燙
+      skills:
+      - luck: 1
+      rewards:
+        除臭岩: 1
+    15:
+      name: 穿越間歇泉吧！
+      skills:
+      - agile: 1
+      rewards:
+        瓦斯球: 1
+    16:
+      name: 危險間歇泉
+      skills:
+      - agile: 1
+      - agile: 1
+      - agile: 1
+      rewards:
+        琥珀菇: 1
+    17:
+      name: 誰打頭陣
+      reduce_skills:
+        speed: 380
+      boosts:
+      - courage:
+          speed: 30
+      rewards:
+        饅頭的化石: 1
+    18:
+      name: 蒸氣深處發光的雙眼
+      stats:
+      - vitality: 110
+      - vitality: 110
+      boosts:
+      - courage:
+          vitality: 30
+      rewards:
+        瓦斯球: 1
+    19:
+      name: 勇敢的誘餌
+      skills:
+      - food: 1
+        courage: 1
+      rewards:
+        琥珀菇: 1
+  perfect_rewards:
+    琥珀菇: 2

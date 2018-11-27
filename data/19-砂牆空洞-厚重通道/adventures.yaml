@@ -1,0 +1,122 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E7%A0%82%E5%A3%81%E3%81%AE%E7%A9%BA%E6%B4%9E
+
+19:
+  name: 砂牆空洞(厚重通道) # 砂壁の空洞(どっさり通路)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 6
+  - 13
+  - 14
+  - 17
+  - 19
+  - 20
+  - 23
+  - 47
+  - 52
+  - 53
+  - 54
+  requirements:
+    1:
+      name: 沙之道路
+      stats:
+      - vitality: 100
+      rewards:
+        彎彎零件: 1
+    2:
+      name: 深沙之道路
+      stats:
+      - vitality: 120
+      boosts:
+      - insensitive:
+          vitality: 20
+      rewards:
+        光輝之砂: 1
+    3:
+      name: 直至腰身沙之道路
+      stats:
+      - vitality: 155
+      boosts:
+      - insensitive:
+          vitality: 30
+      rewards:
+        小顆零件: 2
+    4:
+      name: 易塌的道路
+      stats:
+      - intelligence: 90
+      rewards:
+        彎彎零件: 1
+    5:
+      name: 快塌的道路
+      stats:
+      - intelligence: 110
+      boosts:
+      - hard_head:
+          intelligence: 20
+      rewards:
+        重重零件: 1
+    6:
+      name: 開始崩塌的道路
+      stats:
+      - intelligence: 150
+      boosts:
+      - hard_head:
+          intelligence: 30
+      rewards:
+        光輝之砂: 1
+    7:
+      name: 在沙上奔馳
+      stats:
+      - speed: 110
+      rewards:
+        重重零件: 1
+    8:
+      name: 踏破流沙吧
+      stats:
+      - speed: 150
+      rewards:
+        光輝之砂: 1
+    9:
+      name: 不要下沉衝過去吧
+      stats:
+      - speed: 165
+      rewards:
+        小顆零件: 1
+    10:
+      name: 飛毛腿送貨
+      stats:
+      - speed: 160
+      - speed: 160
+      boosts:
+      - hard_head:
+          speed: 10
+      rewards:
+        光輝之砂: 2
+    11:
+      name: 看穿流沙吧
+      stats:
+      - intelligence: 130
+        speed: 150
+      boosts:
+      - hard_head:
+          intelligence: 30
+      rewards:
+        小顆零件: 2
+    12:
+      name: 快快渡沙河
+      reduce_stats:
+        speed: 450
+      boosts:
+      - hard_head:
+          speed: 30
+      rewards:
+        光輝之砂: 2
+    13:
+      name: 無光沙穴
+      skills:
+      - night_eyes: 1
+      rewards:
+        小顆零件: 1
+  perfect_rewards:
+    光輝之砂: 3

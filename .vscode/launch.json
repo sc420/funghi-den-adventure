@@ -16,27 +16,27 @@
             ]
         },
         {
-            "name": "calc_compatible.py (11,12)",
+            "name": "calc_compatible.py (12,13)",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/calc_compatible.py",
             "console": "integratedTerminal",
             "args": [
                 "--data_dirs",
-                "data/11-樹根隧道-入口,data/12-樹根隧道-中途",
+                "data/12-樹根隧道-入口,data/13-樹根隧道-中途",
                 "--funghis_path",
                 "data/all/funghis.yaml"
             ]
         },
         {
-            "name": "calc_global.py (18,15,12)",
+            "name": "calc_global.py (19,16,13)",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/calc_global.py",
             "console": "integratedTerminal",
             "args": [
                 "--data_dirs",
-                "data/18-砂牆空洞-厚重通道,data/15-清涼結冰洞-光滑通道,data/12-樹根隧道-中途",
+                "data/19-砂牆空洞-厚重通道,data/16-清涼結冰洞-光滑通道,data/13-樹根隧道-中途",
                 "--funghis_path",
                 "data/all/funghis.yaml"
             ]

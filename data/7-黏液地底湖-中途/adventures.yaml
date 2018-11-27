@@ -1,0 +1,147 @@
+# Reference: https://namekonosuwiki.gamerch.com/%E3%83%A0%E3%83%81%E3%83%B3%E5%9C%B0%E5%BA%95%E6%B9%96
+
+7:
+  name: 黏液地底湖(中途) # ムチン地底湖(なかごろ)
+  capacity: 3
+  requirements:
+    1:
+      name: 濕滑道路
+      stats:
+      - vitality: 60
+      rewards:
+        水邊的石頭: 1
+    2:
+      name: 很濕滑的道路
+      stats:
+      - vitality: 75
+      - vitality: 75
+      rewards:
+        黏液結晶: 1
+    3:
+      name: 濕滑無比的道路
+      stats:
+      - vitality: 80
+      - vitality: 80
+      - vitality: 80
+      boosts:
+      - submerge:
+          vitality: 10
+      rewards:
+        黏液種子: 1
+    4:
+      name: 水邊的行走方法
+      stats:
+      - intelligence: 40
+      rewards:
+        水邊的石頭: 2
+    5:
+      name: 前往淺水域
+      stats:
+      - intelligence: 50
+      rewards:
+        綿密泡沫: 1
+    6:
+      name: 前往深水域時
+      stats:
+      - intelligence: 80
+      boosts:
+      - swimmer:
+          intelligence: 20
+      rewards:
+        毬藻: 1
+    7:
+      name: 做好滅頂準備
+      stats:
+      - intelligence: 90
+      boosts:
+      - swimmer:
+          intelligence: 20
+      rewards:
+        黏液寶珠: 1
+    8:
+      name: 光滑道路
+      stats:
+      - speed: 50
+      rewards:
+        天然水: 2
+    9:
+      name: 很光滑的道路
+      stats:
+      - speed: 75
+      - speed: 75
+      rewards:
+        綿密泡沫: 1
+    10:
+      name: 光滑無比的道路
+      stats:
+      - speed: 80
+      - speed: 80
+      - speed: 80
+      boosts:
+      - submerge:
+          speed: 10
+      rewards:
+        黏液種子: 1
+    11:
+      name: 穿越湖的方法
+      reduce_stats:
+        intelligence: 240
+      boosts:
+      - swimmer:
+          intelligence: 10
+      rewards:
+        天然水: 3
+    12:
+      name: 大家一起泳渡
+      reduce_stats:
+        intelligence: 300
+      reduce_boosts:
+      - swimmer:
+          intelligence: 30
+      rewards:
+        綿密泡沫: 2
+    13:
+      name: 水中的狀況如何呢？
+      stats:
+      - intelligence: 80
+        speed: 80
+      boosts:
+      - submerge:
+          intelligence: 10
+      rewards:
+        綿密泡沫: 1
+    14:
+      name: 下沉憋氣
+      skills:
+      - hard_head: 1
+      rewards:
+        黏液種子: 2
+    15:
+      name: 深水窪
+      skills:
+      - swimmer: 1
+        submerge: 1
+      rewards:
+        黏液寶珠: 1
+    16:
+      name: 等待的陰影
+      stats:
+      - vitality: 90
+      - vitality: 90
+      boosts:
+      - poison:
+          vitality: 50
+      rewards:
+        黏液種子: 1
+    17:
+      name: 潛伏在深淵的利剪
+      stats:
+      - vitality: 120
+      - vitality: 120
+      boosts:
+      - poison:
+          vitality: 50
+      rewards:
+        黏液寶珠: 1
+  perfect_rewards:
+    黏液寶珠: 2
