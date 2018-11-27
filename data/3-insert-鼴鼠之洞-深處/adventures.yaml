@@ -1,0 +1,131 @@
+3:
+  name: 鼴鼠之洞(深處)
+  capacity: 3
+  allowed_funghis:
+  - 1
+  - 8
+  - 20
+  - 24
+  - 26
+  - 40
+  - 42
+  - 52
+  - 53
+  - 56
+  - 64
+  requirements:
+    1:
+      name: 柔軟道路
+      stats:
+      - vitality: 120
+      rewards:
+        漩渦樹根: 3
+    2:
+      name: 昏暗道路
+      stats:
+      - vitality: 140
+      rewards:
+        堅硬黏土: 2
+    3:
+      name: 歪七扭八的道路
+      stats:
+      - vitality: 170
+      rewards:
+        發光黏土: 1
+    4:
+      name: 柔軟昏暗的道路
+      stats:
+      - vitality: 130
+      - vitality: 130
+      boosts:
+      - sensor:
+          vitality: 30
+      rewards:
+        雜亂樹根: 1
+    5:
+      name: 凹凸道路
+      stats:
+      - intelligence: 110
+      rewards:
+        鼴鼠之爪: 2
+    6:
+      name: 狹窄道路
+      stats:
+      - intelligence: 130
+      rewards:
+        堅硬黏土: 3
+    7:
+      name: 潮濕道路
+      stats:
+      - speed: 150
+      rewards:
+        鼴鼠眼鏡: 1
+    8:
+      name: 擋路的岩石
+      stats:
+      - vitality: 200
+      boosts:
+      - sensor:
+          vitality: 40
+      rewards:
+        發光黏土: 2
+    9:
+      name: 惡臭橫洞
+      stats:
+      - speed: 200
+      boosts:
+      - sensor:
+          speed: 40
+      rewards:
+        發光黏土: 2
+    10:
+      name: 鼴鼠正看著你？？
+      stats:
+      - speed: 100
+      - speed: 100
+      - speed: 100
+      boosts:
+      - night_eyes:
+          speed: 30
+      rewards:
+        雜亂樹根: 1
+    11:
+      name: 漆黑的橫洞
+      stats:
+      - intelligence: 120
+      - intelligence: 120
+      boosts:
+      - night_eyes:
+          intelligence: 20
+      rewards:
+        鼴鼠眼鏡: 1
+    12:
+      name: 匿蹤前進吧
+      reduce_stats:
+        vitality: 450
+      boosts:
+      - sensor:
+          vitality: 20
+      rewards:
+        雜亂樹根: 2
+    13:
+      name: 來回
+      stats:
+      - vitality: 130
+        speed: 130
+      rewards:
+        鼴鼠尾巴: 2
+    14:
+      name: 祕密行動
+      skills:
+      - stealth: 1
+      rewards:
+        發光黏土: 1
+    15:
+      name: 摸索前進
+      skills:
+      - sensor: 1
+      rewards:
+        樹根寶石: 3
+  perfect_rewards:
+    鼴鼠眼鏡: 3
