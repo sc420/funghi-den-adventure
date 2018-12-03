@@ -73,7 +73,7 @@ python calc_compatible.py --data_dirs=data/20-灼熱熔岩窟-咕嘟咕嘟區,da
 
 ### Global Allocations
 
-`calc_global.py` calculates best allocations for multiple adventures without specifying duplicated funghis. The former adventures in `--data_dirs` will be allocated first. This default maximum number of allocation outputs is 1, use `--max` to adjust.
+`calc_global.py` calculates best allocations for multiple adventures without specifying duplicated funghis. The former adventures in `--data_dirs` will be allocated first. The default maximum number of allocation outputs is 1, use `--max` to adjust.
 
 ```shell
 python calc_global.py --data_dirs=data/19-砂牆空洞-厚重通道,data/16-清涼結冰洞-光滑通道,data/13-樹根隧道-中途,data/11-螢火蟲之路-中途,data/9-咕嚕咕嚕間歇泉-中途,data/7-黏液地底湖-中途,data/5-岩石隧道-中途,data/2-鼴鼠之洞-中途 --funghis_path=data/all/funghis.yaml
